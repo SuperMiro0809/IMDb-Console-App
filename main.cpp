@@ -1,7 +1,8 @@
-#include <screens.h>
+#include <navigation.h>
+#include <routes.h>
 
 int main() {
-    printLandingScreen();
+    useNavigation(LANDING_PAGE);
 
     return 0;
 }
