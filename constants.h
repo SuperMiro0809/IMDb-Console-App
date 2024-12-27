@@ -7,3 +7,6 @@ constexpr int DEFAULT_DIVIDER_LENGTH = 25;
 constexpr char DEFAULT_DIVIDER_CHAR = '-';
 
 constexpr int DEFAULT_TEXT_FIELD_LENGTH = 255;
+
+constexpr char DEFAULT_DB_DELIMITER = '|';
+constexpr int DEFAULT_DB_ROW_SIZE = 1000;
