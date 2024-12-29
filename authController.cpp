@@ -19,7 +19,7 @@ bool checkIfUserExists(const char* username) {
     char line[DEFAULT_DB_ROW_SIZE];
 
     while (MyFile >> line) {
-        char* currentUsername = getColumn(line, 1);
+        char* currentUsername = getColumn(line, USERNAME_COLUMN);
 
         int cmp = myStrCmp(username, currentUsername);
 
@@ -65,5 +65,38 @@ int registerUser(const char* username, const char* password, const char* repeatP
 }
 
 int loginUser(const char* username, const char* password) {
-    return 1;
+    if (!username || !password) {
+        return 0;
+    }
+
+    ifstream MyFile("users.txt");
+
+    if (!MyFile.is_open()) {
+        cout << "Error: Unable to open file: users.txt" << endl;
+        return false;
+    }
+
+    char line[DEFAULT_DB_ROW_SIZE];
+
+    while (MyFile >> line) {
+        char* currentId = getColumn(line, ID_COLUMN);
+        char* currentUsername = getColumn(line, USERNAME_COLUMN);
+        char* currentPassword = getColumn(line, PASSWORD_COLUMN);
+
+        int cmpUsername = myStrCmp(username, currentUsername);
+        int cmpPassword = myStrCmp(password, currentPassword);
+        int idNumber = myAtoi(currentId);
+
+        delete[] currentUsername;
+        delete[] currentPassword;
+        delete[] currentId;
+
+        if (cmpUsername == 0 && cmpPassword == 0) {
+            MyFile.close();
+            return idNumber;
+        }
+    }
+
+    MyFile.close();
+    return LOGIN_FAILED;
 }

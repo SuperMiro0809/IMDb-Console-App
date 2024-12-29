@@ -2,39 +2,45 @@
 
 #include <ui-components.h>
 #include <constants.h>
+#include <authController.h>
+#include <errorCodes.h>
 
 #include <iostream>
 using namespace std;
 
-void actionLoginScreen() {
+void actionLoginScreen(const char* username, const char* password, int& result) {
+    if (!username || !password) {
+        return;
+    }
     // api login
+    result = loginUser(username, password);
+}
 
-    // check if success
+void formLoginScreen() {
+    int result = 0;
 
-    // retrieve user
+    do {
+        char* username = printTextField("Enter username:");
+        char* password = printTextField("Enter password:");
 
-    // navigate
+        actionLoginScreen(username, password, result);
+
+        delete[] username;
+        delete[] password;
+
+        if (result == LOGIN_FAILED) {
+            printError(result);
+        }
+    } while(result == LOGIN_FAILED);
+
+    // success
+    cout << result << endl;
 }
 
 void renderLoginScreen() {
-    char* username = new char[DEFAULT_TEXT_FIELD_LENGTH];
-    char* password = new char[DEFAULT_TEXT_FIELD_LENGTH];
-
     printScreenHeader("Login to IMDb -", 93, "Internet Movie Database!", 33);
 
     cin.ignore(); // discard newline character
 
-    printScreenText("Enter username:");
-    cin.getline(username, DEFAULT_TEXT_FIELD_LENGTH);
-
-    printScreenText("Enter password:");
-    cin.getline(password, DEFAULT_TEXT_FIELD_LENGTH);
-
-    cout << "Username: " << username <<endl;
-    cout << "Password: " << password <<endl;
-
-    actionLoginScreen();
-
-    delete[] username;
-    delete[] password;
+    formLoginScreen();
 }
