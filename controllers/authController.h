@@ -8,6 +8,8 @@ struct userType {
     char* role;
 };
 
+constexpr char* USER_DB = "users.txt";
+
 constexpr int ID_COLUMN = 0;
 constexpr int USERNAME_COLUMN = 1;
 constexpr int PASSWORD_COLUMN = 2;

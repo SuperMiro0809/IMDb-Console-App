@@ -8,7 +8,7 @@
 using namespace std;
 
 bool checkIfUserExists(const char* username) {
-    ifstream MyFile("users.txt");
+    ifstream MyFile(USER_DB);
 
     if (!MyFile.is_open()) {
         cout << "Error: Unable to open file: users.txt" << endl;
@@ -51,10 +51,10 @@ int registerUser(const char* username, const char* password, const char* repeatP
         return USER_ALREDY_EXISTS;
     }
 
-    ofstream MyFile("users.txt", ios::app); // open file in append mode
+    ofstream MyFile(USER_DB, ios::app); // open file in append mode
 
     // save record
-    int nextId = autoIncrement("users.txt");
+    int nextId = autoIncrement(USER_DB);
     MyFile << nextId << DEFAULT_DB_DELIMITER;
     MyFile << username << DEFAULT_DB_DELIMITER;
     MyFile << password << DEFAULT_DB_DELIMITER;
@@ -69,7 +69,7 @@ int loginUser(const char* username, const char* password) {
         return 0;
     }
 
-    ifstream MyFile("users.txt");
+    ifstream MyFile(USER_DB);
 
     if (!MyFile.is_open()) {
         cout << "Error: Unable to open file: users.txt" << endl;
@@ -102,7 +102,7 @@ int loginUser(const char* username, const char* password) {
 }
 
 userType getUserById(int id) {
-    ifstream MyFile("users.txt");
+    ifstream MyFile(USER_DB);
 
     char line[DEFAULT_DB_ROW_SIZE];
     while (MyFile >> line) {
@@ -123,7 +123,6 @@ userType getUserById(int id) {
             // used dynamic memory here will be deleted on logout
 
             MyFile.close();
-
             return currentUser;
         }
     }
