@@ -9,3 +9,5 @@ void printScreenText(const char* text, int textColor = DEFAULT_COLOR);
 void printScreenDivider(int length = DEFAULT_DIVIDER_LENGTH);
 
 char* printTextField(const char* prompt, int textColor = DEFAULT_COLOR);
+
+void printUserInfo(const char* username, const char* role);

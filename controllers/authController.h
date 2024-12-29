@@ -8,12 +8,13 @@ struct userType {
     char* role;
 };
 
-constexpr char* USER_DB = "users.txt";
+constexpr const char* USER_DB = "users.txt";
 
 constexpr int ID_COLUMN = 0;
 constexpr int USERNAME_COLUMN = 1;
 constexpr int PASSWORD_COLUMN = 2;
 constexpr int ROLE_COLUMN = 3;
+
 constexpr userType GUEST = { -1, nullptr, nullptr };
 
 bool checkIfUserExists(const char* username);

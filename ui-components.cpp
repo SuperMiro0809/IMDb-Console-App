@@ -53,3 +53,20 @@ char* printTextField(const char* prompt, int textColor) {
 
     return input;
 }
+
+void printUserInfo(const char* username, const char* role) {
+    if (!username || !role) {
+        return;
+    }
+
+    cout << "Welcome back, ";
+    setConsoleColor(93);
+    cout << username << "! ";
+
+    resetConsoleColor();
+
+    cout << "Logged as: ";
+    setConsoleColor(93);
+    cout << role << endl;
+    resetConsoleColor();
+}

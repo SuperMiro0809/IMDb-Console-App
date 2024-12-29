@@ -7,9 +7,10 @@
 #include <iostream>
 using namespace std;
 
-void renderMoviesListAdminScreen() {
+void renderMoviesListAdminScreen(userType user) {
     printScreenHeader("Movies List -", 93, "Internet Movie Database!", 33);
     
+    printUserInfo(user.username, user.role);
     printScreenText("Please sellect how you want to procceed:");
 
     setConsoleColor(32);
@@ -25,9 +26,10 @@ void renderMoviesListAdminScreen() {
 
 
 
-void renderMoviesListUserScreen() {
+void renderMoviesListUserScreen(userType user) {
     printScreenHeader("Movies List -", 93, "Internet Movie Database!", 33);
 
+    printUserInfo(user.username, user.role);
     printScreenText("Please sellect how you want to procceed:");
 
     setConsoleColor(32);
@@ -46,9 +48,9 @@ void renderMoviesListScreen(userType user) {
     int adminRoleCmp = myStrCmp(user.role, "Admin");
 
     if (userRoleCmp == 0) {
-        renderMoviesListUserScreen();
+        renderMoviesListUserScreen(user);
     } else if (adminRoleCmp == 0) {
-        renderMoviesListAdminScreen();
+        renderMoviesListAdminScreen(user);
     } else {
         // Unathorized
     }
