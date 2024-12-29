@@ -6,6 +6,7 @@
 #include <errorCodes.h>
 #include <routes.h>
 #include <navigation.h>
+#include <colors.h>
 
 #include <iostream>
 using namespace std;
@@ -45,7 +46,7 @@ void formRegisterPage() {
 }
 
 void renderRegisterScreen() {
-    printScreenHeader("Register to IMDb -", 93, "Internet Movie Database!", 33);
+    printScreenHeader("Register to IMDb -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
 
     cin.ignore(); // discard newline character
 

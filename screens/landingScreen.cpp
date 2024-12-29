@@ -4,6 +4,7 @@
 #include <utils/consoleUtils.h>
 #include <navigation.h>
 #include <routes.h>
+#include <colors.h>
 
 #include <iostream>
 using namespace std;
@@ -29,14 +30,14 @@ void actionLandingScreen() {
 }
 
 void renderLandingScreen() {
-    printScreenHeader("Welcome to IMDb -", 93, "Internet Movie Database!", 33);
+    printScreenHeader("Welcome to IMDb -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
 
     printScreenText("This is the place where you can find information about every movie in the universe.");
     printScreenDivider();
 
     printScreenText("Please sellect how you want to procceed:");
 
-    setConsoleColor(32);
+    setConsoleColor(SUCCESS_COLOR);
     cout << "1. Already have account? Login" << endl;
     cout << "2. Don't have account? Register" << endl;
     cout << "3. Exit" << endl;

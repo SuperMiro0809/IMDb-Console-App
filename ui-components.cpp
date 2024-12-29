@@ -1,8 +1,9 @@
 #include <ui-components.h>
 
-#include <iostream>
 #include <iomanip>
 #include <utils/consoleUtils.h>
+
+#include <iostream>
 using namespace std;
 
 void printScreenHeader(const char* title, int titleColor, const char* subtitle, int subtitleColor) {
@@ -60,13 +61,13 @@ void printUserInfo(const char* username, const char* role) {
     }
 
     cout << "Welcome back, ";
-    setConsoleColor(93);
+    setConsoleColor(PRIMARY_YELLOW_COLOR);
     cout << username << "! ";
 
     resetConsoleColor();
 
     cout << "Logged as: ";
-    setConsoleColor(93);
+    setConsoleColor(PRIMARY_YELLOW_COLOR);
     cout << role << endl;
     resetConsoleColor();
 }

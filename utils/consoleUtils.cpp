@@ -1,5 +1,8 @@
-#include <iostream>
 #include <utils/consoleUtils.h>
+
+#include <colors.h>
+
+#include <iostream>
 using namespace std;
 
 void setConsoleColor(int textColor) {
