@@ -4,6 +4,8 @@
 #include <constants.h>
 #include <controllers/authController.h>
 #include <errorCodes.h>
+#include <routes.h>
+#include <navigation.h>
 
 #include <iostream>
 using namespace std;
@@ -34,7 +36,9 @@ void formLoginScreen() {
     } while(result == LOGIN_FAILED);
 
     // success
-    cout << result << endl;
+    userType user = getUserById(result);
+
+    useNavigation(MOVIES_LIST_PAGE, user);
 }
 
 void renderLoginScreen() {

@@ -4,6 +4,8 @@
 #include <constants.h>
 #include <controllers/authController.h>
 #include <errorCodes.h>
+#include <routes.h>
+#include <navigation.h>
 
 #include <iostream>
 using namespace std;
@@ -37,6 +39,9 @@ void formRegisterPage() {
     } while (result == PASSWORDS_NOT_MATCH || result == USER_ALREDY_EXISTS);
 
     // success
+    userType user = getUserById(result);
+
+    useNavigation(MOVIES_LIST_PAGE, user);
 }
 
 void renderRegisterScreen() {
