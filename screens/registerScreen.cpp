@@ -1,4 +1,4 @@
-#include <registerScreen.h>
+#include <screens/registerScreen.h>
 
 #include <ui-components.h>
 #include <constants.h>

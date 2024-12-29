@@ -1,9 +1,9 @@
 #include <navigation.h>
 
 #include <routes.h>
-#include <landingScreen.h>
-#include <registerScreen.h>
-#include <loginScreen.h>
+#include <screens/landingScreen.h>
+#include <screens/registerScreen.h>
+#include <screens/loginScreen.h>
 
 #include <iostream>
 using namespace std;
