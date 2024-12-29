@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <constants.h>
 #include <utils/databaseUtils.h>
 #include <utils/stringUtils.h>
 #include <errorCodes.h>
@@ -58,7 +57,8 @@ int registerUser(const char* username, const char* password, const char* repeatP
     int nextId = autoIncrement("users.txt");
     MyFile << nextId << DEFAULT_DB_DELIMITER;
     MyFile << username << DEFAULT_DB_DELIMITER;
-    MyFile << password << '\n';
+    MyFile << password << DEFAULT_DB_DELIMITER;
+    MyFile << "User" << '\n';
 
     MyFile.close();
     return nextId;
@@ -99,4 +99,34 @@ int loginUser(const char* username, const char* password) {
 
     MyFile.close();
     return LOGIN_FAILED;
+}
+
+userType getUserById(int id) {
+    ifstream MyFile("users.txt");
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    while (MyFile >> line) {
+        char* currentId = getColumn(line, ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+
+        delete[] currentId;
+
+        if (idNumber == id) {
+            char* currentUsername = getColumn(line, USERNAME_COLUMN);
+            char* currentRole = getColumn(line, ROLE_COLUMN);
+
+            userType currentUser;
+            currentUser.id = idNumber;
+            currentUser.username = currentUsername;
+            currentUser.role = currentRole;
+
+            // used dynamic memory here will be deleted on logout
+
+            MyFile.close();
+
+            return currentUser;
+        }
+    }
+
+    return GUEST;
 }
