@@ -1,4 +1,4 @@
-#include <authController.h>
+#include <controllers/authController.h>
 
 #include <iostream>
 #include <fstream>

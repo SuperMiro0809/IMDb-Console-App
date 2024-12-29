@@ -2,7 +2,7 @@
 
 #include <ui-components.h>
 #include <constants.h>
-#include <authController.h>
+#include <controllers/authController.h>
 #include <errorCodes.h>
 
 #include <iostream>
