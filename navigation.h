@@ -1,3 +1,5 @@
 #pragma once
 
-void useNavigation(int code);
+#include <controllers/authController.h>
+
+void useNavigation(int code, userType user = GUEST);
