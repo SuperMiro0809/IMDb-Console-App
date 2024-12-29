@@ -3,8 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <constants.h>
-#include <databaseUtils.h>
-#include <stringUtils.h>
+#include <utils/databaseUtils.h>
+#include <utils/stringUtils.h>
 #include <errorCodes.h>
 using namespace std;
 

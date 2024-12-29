@@ -1,7 +1,7 @@
 #include <screens/landingScreen.h>
 
 #include <ui-components.h>
-#include <console-utils.h>
+#include <utils/consoleUtils.h>
 #include <navigation.h>
 #include <routes.h>
 

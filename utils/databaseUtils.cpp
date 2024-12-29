@@ -1,9 +1,9 @@
-#include <databaseUtils.h>
+#include <utils/databaseUtils.h>
 
 #include <iostream>
 #include <fstream>
 #include <constants.h>
-#include <stringUtils.h>
+#include <utils/stringUtils.h>
 using namespace std;
 
 int autoIncrement(const char* dbName) {
