@@ -17,13 +17,13 @@ void actionLandingScreen() {
     } while (operation < 0 || operation > 3);
 
     switch (operation) {
-        case 1:
+        case LOGIN_OPERATION:
             useNavigation(LOGIN_PAGE);
             break;
-        case 2:
+        case REGISTER_OPERATION:
             useNavigation(REGISTER_PAGE);
             break;
-        case 3:
+        case EXIT_OPERATION:
             exit(0);
             break;
     }
@@ -38,9 +38,9 @@ void renderLandingScreen() {
     printScreenText("Please sellect how you want to procceed:");
 
     setConsoleColor(SUCCESS_COLOR);
-    cout << "1. Already have account? Login" << endl;
-    cout << "2. Don't have account? Register" << endl;
-    cout << "3. Exit" << endl;
+    cout << LOGIN_OPERATION << ". Already have account? Login" << endl;
+    cout << REGISTER_OPERATION << ". Don't have account? Register" << endl;
+    cout << EXIT_OPERATION << ". Exit" << endl;
     resetConsoleColor();
 
     actionLandingScreen();
