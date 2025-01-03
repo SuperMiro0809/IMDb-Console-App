@@ -5,6 +5,7 @@
 #include <screens/registerScreen.h>
 #include <screens/loginScreen.h>
 #include <screens/moviesListScreen.h>
+#include <screens/moviesListAddScreen.h>
 #include <utils/stringUtils.h>
 
 #include <iostream>
@@ -25,6 +26,9 @@ void useNavigation(int code, userType user) {
             break;
         case MOVIES_LIST_PAGE:
             renderMoviesListScreen(user);
+            break;
+        case MOVIES_LIST_ADD_PAGE:
+            renderMoviesListAddScreen();
             break;
         default:
             break;

@@ -55,6 +55,19 @@ char* printTextField(const char* prompt, int textColor) {
     return input;
 }
 
+int printNumberField(const char* prompt, int textColor) {
+    if (!prompt) {
+        return -1;
+    }
+
+    int number;
+
+    printScreenText(prompt, textColor);
+    cin >> number;
+
+    return number;
+}
+
 void printUserInfo(const char* username, const char* role) {
     if (!username || !role) {
         return;

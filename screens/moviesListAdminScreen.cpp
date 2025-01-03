@@ -3,6 +3,8 @@
 #include <ui-components.h>
 #include <utils/consoleUtils.h>
 #include <colors.h>
+#include <routes.h>
+#include <navigation.h>
 
 #include <iostream>
 using namespace std;
@@ -16,7 +18,7 @@ void actionMoviesListAdminScreen() {
 
     switch (operation) {
         case ADMIN_ADD_OPERATION:
-            // useNavigation(LOGIN_PAGE);
+            useNavigation(MOVIES_LIST_ADD_PAGE);
             break;
     }
 }
