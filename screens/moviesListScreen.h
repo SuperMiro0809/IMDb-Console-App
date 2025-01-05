@@ -1,5 +1,5 @@
 #pragma once
 
-#include <controllers/authController.h>
+#include <types.h>
 
 int renderMoviesListScreen(userType user, routeParamsType& routeParams);
