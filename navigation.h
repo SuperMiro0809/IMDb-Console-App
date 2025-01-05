@@ -1,5 +1,5 @@
 #pragma once
 
-#include <controllers/authController.h>
+#include <types.h>
 
 int useNavigation(int code, userType& user);

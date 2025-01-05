@@ -1,12 +1,7 @@
 #pragma once
 
 #include <constants.h>
-
-struct userType {
-    int id;
-    char* username;
-    char* role;
-};
+#include <types.h>
 
 constexpr const char* USER_DB = "users.txt";
 

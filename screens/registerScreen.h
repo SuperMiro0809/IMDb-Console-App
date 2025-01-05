@@ -1,6 +1,6 @@
 #pragma once
 
-#include <controllers/authController.h>
+#include <types.h>
 
 void actionRegisterScreen(const char* username, const char* password, const char* repeatPassword, int& result);
 

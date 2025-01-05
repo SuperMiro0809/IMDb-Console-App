@@ -1,6 +1,6 @@
 #pragma once
 
-#include <controllers/authController.h>
+#include <types.h>
 
 constexpr int SEARCH_TITLE_OPERATION = 1;
 constexpr int SEARCH_GENRE_OPERATION = 2;

@@ -1,5 +1,6 @@
 #include <screens/loginScreen.h>
 
+#include <controllers/authController.h>
 #include <ui-components.h>
 #include <constants.h>
 #include <errorCodes.h>

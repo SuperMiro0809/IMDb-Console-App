@@ -1,6 +1,6 @@
 #include <navigation.h>
 #include <routes.h>
-#include <controllers/authController.h>
+#include <types.h>
 
 void runApplication(userType& user);
 
