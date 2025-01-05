@@ -18,7 +18,7 @@ void actionMoviesListAdminScreen() {
 
     switch (operation) {
         case ADMIN_ADD_OPERATION:
-            useNavigation(MOVIES_LIST_ADD_PAGE);
+            // useNavigation(MOVIES_LIST_ADD_PAGE);
             break;
     }
 }

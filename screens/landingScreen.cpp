@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-void actionLandingScreen() {
+int actionLandingScreen() {
     int operation;
 
     do {
@@ -18,18 +18,17 @@ void actionLandingScreen() {
 
     switch (operation) {
         case LOGIN_OPERATION:
-            useNavigation(LOGIN_PAGE);
-            break;
+            return LOGIN_PAGE;
         case REGISTER_OPERATION:
-            useNavigation(REGISTER_PAGE);
-            break;
+            return REGISTER_PAGE;
         case EXIT_OPERATION:
-            exit(0);
-            break;
+            return EXIT;
+        default:
+            return EXIT;
     }
 }
 
-void renderLandingScreen() {
+int renderLandingScreen() {
     printScreenHeader("Welcome to IMDb -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
 
     printScreenText("This is the place where you can find information about every movie in the universe.");
@@ -43,5 +42,5 @@ void renderLandingScreen() {
     cout << EXIT_OPERATION << ". Exit" << endl;
     resetConsoleColor();
 
-    actionLandingScreen();
+    return actionLandingScreen();
 }

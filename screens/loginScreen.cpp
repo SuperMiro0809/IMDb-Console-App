@@ -2,7 +2,6 @@
 
 #include <ui-components.h>
 #include <constants.h>
-#include <controllers/authController.h>
 #include <errorCodes.h>
 #include <routes.h>
 #include <navigation.h>
@@ -19,7 +18,7 @@ void actionLoginScreen(const char* username, const char* password, int& result) 
     result = loginUser(username, password);
 }
 
-void formLoginScreen() {
+int formLoginScreen(userType& user) {
     int result = 0;
 
     do {
@@ -37,15 +36,16 @@ void formLoginScreen() {
     } while(result == LOGIN_FAILED);
 
     // success
-    userType user = getUserById(result);
+    user = getUserById(result);
 
-    useNavigation(MOVIES_LIST_PAGE, user);
+    // navigate to Movies List
+    return MOVIES_LIST_PAGE;
 }
 
-void renderLoginScreen() {
+int renderLoginScreen(userType& user) {
     printScreenHeader("Login to IMDb -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
 
     cin.ignore(); // discard newline character
 
-    formLoginScreen();
+    return formLoginScreen(user);
 }

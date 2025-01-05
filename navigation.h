@@ -2,4 +2,4 @@
 
 #include <controllers/authController.h>
 
-void useNavigation(int code, userType user = GUEST);
+int useNavigation(int code, userType& user);

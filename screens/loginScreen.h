@@ -1,7 +1,9 @@
 #pragma once
 
+#include <controllers/authController.h>
+
 void actionLoginScreen(const char* username, const char* password, int& result);
 
-void formLoginScreen();
+int formLoginScreen(userType& user);
 
-void renderLoginScreen();
+int renderLoginScreen(userType& user);

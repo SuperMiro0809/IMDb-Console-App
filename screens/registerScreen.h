@@ -1,7 +1,9 @@
 #pragma once
 
+#include <controllers/authController.h>
+
 void actionRegisterScreen(const char* username, const char* password, const char* repeatPassword, int& result);
 
-void formRegisterPage();
+int formRegisterPage(userType& user);
 
-void renderRegisterScreen();
+int renderRegisterScreen(userType& user);

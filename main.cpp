@@ -1,11 +1,23 @@
 #include <navigation.h>
 #include <routes.h>
+#include <controllers/authController.h>
+
+void runApplication(userType& user);
 
 int main() {
     // add global user session store
-    // pass the session to every component
+    userType currentUser = GUEST;
 
-    useNavigation(LANDING_PAGE);
+    // pass the session to every component
+    runApplication(currentUser);
 
     return 0;
+}
+
+void runApplication(userType& user) {
+    int currentPage = LANDING_PAGE; // start at the landing page
+
+    while (currentPage != EXIT) {
+        currentPage = useNavigation(currentPage, user);
+    }
 }

@@ -11,26 +11,23 @@
 #include <iostream>
 using namespace std;
 
-void useNavigation(int code, userType user) {
+int useNavigation(int code, userType& user) {
     cout << "Navigation..." << endl;
 
     switch (code) {
         case LANDING_PAGE:
-            renderLandingScreen();
-            break;
+            return renderLandingScreen();
         case REGISTER_PAGE:
-            renderRegisterScreen();
-            break;
+            return renderRegisterScreen(user);
         case LOGIN_PAGE:
-            renderLoginScreen();
-            break;
-        case MOVIES_LIST_PAGE:
-            renderMoviesListScreen(user);
-            break;
-        case MOVIES_LIST_ADD_PAGE:
-            renderMoviesListAddScreen();
-            break;
+            return renderLoginScreen(user);
+        // case MOVIES_LIST_PAGE:
+        //     return renderMoviesListScreen(user);
+        //     break;
+        // case MOVIES_LIST_ADD_PAGE:
+        //     return renderMoviesListAddScreen();
+        //     break;
         default:
-            break;
+            return EXIT; // Exit code
     }
 }
