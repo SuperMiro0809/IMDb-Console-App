@@ -2,4 +2,4 @@
 
 #include <types.h>
 
-int useNavigation(int code, userType& user);
+int useNavigation(int code, userType& user, routeParamsType& routeParams);

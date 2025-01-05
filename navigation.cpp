@@ -11,7 +11,7 @@
 #include <iostream>
 using namespace std;
 
-int useNavigation(int code, userType& user) {
+int useNavigation(int code, userType& user, routeParamsType& routeParams) {
     cout << "Navigation..." << endl;
 
     switch (code) {
@@ -22,7 +22,7 @@ int useNavigation(int code, userType& user) {
         case LOGIN_PAGE:
             return renderLoginScreen(user);
         case MOVIES_LIST_PAGE:
-            return renderMoviesListScreen(user);
+            return renderMoviesListScreen(user, routeParams);
         case MOVIES_LIST_ADD_PAGE:
             return renderMoviesListAddScreen();
         default:

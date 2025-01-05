@@ -10,8 +10,6 @@ constexpr int USERNAME_COLUMN = 1;
 constexpr int PASSWORD_COLUMN = 2;
 constexpr int ROLE_COLUMN = 3;
 
-constexpr userType GUEST = { -1, nullptr, nullptr };
-
 bool checkIfUserExists(const char* username);
 
 int registerUser(const char* username, const char* password, const char* repeatPassword);

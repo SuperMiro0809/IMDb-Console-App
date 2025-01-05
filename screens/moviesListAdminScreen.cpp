@@ -23,7 +23,7 @@ int actionMoviesListAdminScreen() {
     }
 }
 
-int renderMoviesListAdminScreen(userType user) {
+int renderMoviesListAdminScreen(userType user, routeParamsType& routeParams) {
     printScreenHeader("Movies List -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
     
     printUserInfo(user.username, user.role);

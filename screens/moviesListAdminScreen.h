@@ -15,4 +15,4 @@ constexpr int ADMIN_LOGOUT_OPERATION = 10;
 
 int actionMoviesListAdminScreen();
 
-int renderMoviesListAdminScreen(userType user);
+int renderMoviesListAdminScreen(userType user, routeParamsType& routeParams);
