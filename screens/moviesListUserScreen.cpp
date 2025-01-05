@@ -3,15 +3,25 @@
 #include <ui-components.h>
 #include <utils/consoleUtils.h>
 #include <colors.h>
+#include <routes.h>
 
 #include <iostream>
 using namespace std;
 
-void actionMoviesListUserScreen() {
+int actionMoviesListUserScreen() {
+    int operation;
 
+    do {
+        cin >> operation;
+    } while (operation < SEARCH_TITLE_OPERATION || operation > LOGOUT_OPERATION);
+
+    switch (operation) {
+        default:
+            return EXIT;
+    }
 }
 
-void renderMoviesListUserScreen(userType user) {
+int renderMoviesListUserScreen(userType user) {
     printScreenHeader("Movies List -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
 
     printUserInfo(user.username, user.role);
@@ -28,5 +38,5 @@ void renderMoviesListUserScreen(userType user) {
     cout << LOGOUT_OPERATION << ". Logout" << endl;
     resetConsoleColor();
 
-    actionMoviesListUserScreen();
+    return actionMoviesListUserScreen();
 }

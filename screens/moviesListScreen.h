@@ -2,4 +2,4 @@
 
 #include <controllers/authController.h>
 
-void renderMoviesListScreen(userType user);
+int renderMoviesListScreen(userType user);

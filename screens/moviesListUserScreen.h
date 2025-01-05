@@ -10,6 +10,6 @@ constexpr int SORT_TITLE_OPERATION = 5;
 constexpr int FILTER_RATING_OPERATION = 6;
 constexpr int LOGOUT_OPERATION = 7;
 
-void actionMoviesListUserScreen();
+int actionMoviesListUserScreen();
 
-void renderMoviesListUserScreen(userType user);
+int renderMoviesListUserScreen(userType user);

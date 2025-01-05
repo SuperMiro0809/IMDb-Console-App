@@ -21,12 +21,10 @@ int useNavigation(int code, userType& user) {
             return renderRegisterScreen(user);
         case LOGIN_PAGE:
             return renderLoginScreen(user);
-        // case MOVIES_LIST_PAGE:
-        //     return renderMoviesListScreen(user);
-        //     break;
-        // case MOVIES_LIST_ADD_PAGE:
-        //     return renderMoviesListAddScreen();
-        //     break;
+        case MOVIES_LIST_PAGE:
+            return renderMoviesListScreen(user);
+        case MOVIES_LIST_ADD_PAGE:
+            return renderMoviesListAddScreen();
         default:
             return EXIT; // Exit code
     }

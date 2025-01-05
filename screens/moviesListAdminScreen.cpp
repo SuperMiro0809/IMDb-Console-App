@@ -4,12 +4,11 @@
 #include <utils/consoleUtils.h>
 #include <colors.h>
 #include <routes.h>
-#include <navigation.h>
 
 #include <iostream>
 using namespace std;
 
-void actionMoviesListAdminScreen() {
+int actionMoviesListAdminScreen() {
     int operation;
 
     do {
@@ -18,12 +17,13 @@ void actionMoviesListAdminScreen() {
 
     switch (operation) {
         case ADMIN_ADD_OPERATION:
-            // useNavigation(MOVIES_LIST_ADD_PAGE);
-            break;
+            return MOVIES_LIST_ADD_PAGE;
+        default:
+            return EXIT;
     }
 }
 
-void renderMoviesListAdminScreen(userType user) {
+int renderMoviesListAdminScreen(userType user) {
     printScreenHeader("Movies List -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
     
     printUserInfo(user.username, user.role);
@@ -43,5 +43,5 @@ void renderMoviesListAdminScreen(userType user) {
     cout << ADMIN_LOGOUT_OPERATION << ". Logout" << endl;
     resetConsoleColor();
 
-    actionMoviesListAdminScreen();
+    return actionMoviesListAdminScreen();
 }

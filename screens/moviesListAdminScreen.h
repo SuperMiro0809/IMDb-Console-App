@@ -13,6 +13,6 @@ constexpr int ADMIN_UPDATE_OPERATION = 8;
 constexpr int ADMIN_DELETE_OPERATION = 9;
 constexpr int ADMIN_LOGOUT_OPERATION = 10;
 
-void actionMoviesListAdminScreen();
+int actionMoviesListAdminScreen();
 
-void renderMoviesListAdminScreen(userType user);
+int renderMoviesListAdminScreen(userType user);
