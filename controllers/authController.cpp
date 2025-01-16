@@ -129,3 +129,12 @@ userType getUserById(int id) {
 
     return GUEST;
 }
+
+void logoutUser(userType& currentUser) {
+    // delete dynamic memory used after login
+    delete[] currentUser.username;
+    delete[] currentUser.role;
+
+    // current user becomes Guest
+    currentUser = GUEST;
+}

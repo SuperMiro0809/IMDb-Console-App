@@ -17,3 +17,5 @@ int registerUser(const char* username, const char* password, const char* repeatP
 int loginUser(const char* username, const char* password);
 
 userType getUserById(int id);
+
+void logoutUser(userType& currentUser);
