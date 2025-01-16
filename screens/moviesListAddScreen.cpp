@@ -8,13 +8,13 @@
 #include <iostream>
 using namespace std;
 
-void actionMoviesListAddScreen(const char* title, int year, const char* genre, const char* director, int& result) {
-    if (!title || !genre || !director) {
+void actionMoviesListAddScreen(const char* title, int year, const char* genre, const char* director, const char* const* actors, int actorsCount, int& result) {
+    if (!title || !genre || !director || !actors) {
         return;
     }
 
     // api add movie
-    result = addMovie(title, year, genre, director);
+    result = addMovie(title, year, genre, director, actors, actorsCount);
 }
 
 int formMoviesListAddScreen() {
@@ -29,11 +29,20 @@ int formMoviesListAddScreen() {
         char* genre = printTextField("Enter genre:");
         char* director = printTextField("Enter director:");
 
-        actionMoviesListAddScreen(title, year, genre, director, result);
+        int actorsCount = printNumberField("How many actors:");
+
+        char** actors = printActorsField(actorsCount);
+
+        actionMoviesListAddScreen(title, year, genre, director, actors, actorsCount, result);
 
         delete[] title;
         delete[] genre;
         delete[] director;
+
+        for (int i = 0; i < actorsCount; i++) {
+            delete[] actors[i];
+        }
+        delete[] actors;
     } while (result < 0);
 
     // success - navigate back to Movies List

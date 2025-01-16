@@ -68,6 +68,24 @@ int printNumberField(const char* prompt, int textColor) {
     return number;
 }
 
+char** printActorsField(int actorsCount, int textColor) {
+    char** actors = new char*[actorsCount];
+
+    for (int i = 0; i < actorsCount; i++) {
+        actors[i] = new char[DEFAULT_TEXT_FIELD_LENGTH];
+
+        printScreenText("Enter name for author :", textColor);
+        
+        if (i == 0) {
+            cin.ignore(); // discard newline character only at first index
+        }
+
+        cin.getline(actors[i], DEFAULT_TEXT_FIELD_LENGTH);
+    }
+
+    return actors;
+}
+
 void printUserInfo(const char* username, const char* role) {
     if (!username || !role) {
         return;

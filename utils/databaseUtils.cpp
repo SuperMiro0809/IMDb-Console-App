@@ -21,7 +21,11 @@ int autoIncrement(const char* dbName) {
         DBFile >> line;
 
         char* idStr = substringBeforeSymbol(line, DEFAULT_DB_DELIMITER);
-        currentId = myAtoi(idStr);
+        int idColumn = myAtoi(idStr);
+        
+        if (idColumn > 0) {
+            currentId = idColumn;
+        }
 
         delete[] idStr;
     }
