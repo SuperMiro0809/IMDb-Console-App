@@ -2,6 +2,7 @@
 
 #include <constants.h>
 #include <colors.h>
+#include <types.h>
 
 void printScreenHeader(const char* title, int titleColor, const char* subtitle, int subtitleColor);
 
@@ -16,3 +17,5 @@ int printNumberField(const char* prompt, int textColor = DEFAULT_COLOR);
 char** printActorsField(int actorsCount, int textColor = DEFAULT_COLOR);
 
 void printUserInfo(const char* username, const char* role);
+
+void printMoviesTable(const movieType* movies, int length);

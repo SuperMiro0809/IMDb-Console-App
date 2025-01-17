@@ -36,7 +36,7 @@ void printScreenText(const char* text, int textColor) {
 }
 
 void printScreenDivider(int length) {
-    for (int i = 0; i < DEFAULT_DIVIDER_LENGTH; i++) {
+    for (int i = 0; i < length; i++) {
         cout << DEFAULT_DIVIDER_CHAR;
     }
     cout << endl;
@@ -101,4 +101,46 @@ void printUserInfo(const char* username, const char* role) {
     setConsoleColor(PRIMARY_YELLOW_COLOR);
     cout << role << endl;
     resetConsoleColor();
+}
+
+void printMoviesTable(const movieType* movies, int length) {
+    if (!movies) {
+        return;
+    }
+
+    cout << endl;
+
+    // print the table header
+    cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << left << "ID"
+         << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Title"
+         << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Year"
+         << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Genre" << endl;
+
+    printScreenDivider(80);
+
+    for (int i = 0; i < length; i++) {
+        cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << left << movies[i].id
+             << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].title
+             << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].year
+             << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].genre << endl;
+
+        cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << ""
+             << "Director: " << movies[i].director << endl;
+
+        cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << ""
+             << "Actors: ";
+        
+        for (int j = 0; j < movies[i].actorsCount; j++) {
+            cout << movies[i].actors[j];
+
+            if (j != movies[i].actorsCount - 1) {
+                cout << ", ";
+            }
+        }
+
+        cout << endl;
+        printScreenDivider(80);
+    }
+
+    cout << endl;
 }
