@@ -13,6 +13,6 @@ void sortRatingQuery(routeParamsType& routeParams, char* value);
 
 void sortTitleQuery(routeParamsType& routeParams);
 
-void searchTitleQuery(routeParamsType& routeParams, char* value);
+void searchTitleQuery(routeParamsType& routeParams);
 
 void searchGenreQuery(routeParamsType& routeParams, char* value);

@@ -29,7 +29,7 @@ int renderMoviesListUserScreen(userType& user, routeParamsType& routeParams) {
     printScreenDivider();
 
     movieType* movies = getMovies(routeParams);
-    int moviesCount = getMoviesCount();
+    int moviesCount = getMoviesCount(routeParams);
 
     printMoviesTable(movies, moviesCount);
 

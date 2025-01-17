@@ -1,5 +1,6 @@
 #include <utils/routeParamsUtils.h>
 
+#include <constants.h>
 #include <utils/stringUtils.h>
 
 #include <iostream>
@@ -23,13 +24,13 @@ void sortTitleQuery(routeParamsType& routeParams) {
     bool firstTry = true;
 
     do {
-        cout << "Please type how you want to sort? "
+        cout << "Please enter how you want to sort? "
              << "< " << ASC_SORT << " | "
              << DESC_SORT << " | "
              << NO_SORT << " >:";
 
         if (firstTry) {
-            cin.ignore();
+            cin.ignore(); // discard newline character
         }
 
         cin.getline(value, INITIAL_SORT_VALUE_SIZE);
@@ -44,9 +45,19 @@ void sortTitleQuery(routeParamsType& routeParams) {
     }
 }
 
-void searchTitleQuery(routeParamsType& routeParams, char* value) {
-    delete[] routeParams.searchTitle;
-    routeParams.searchTitle;
+void searchTitleQuery(routeParamsType& routeParams) {
+    if (routeParams.searchTitle) {
+        delete[] routeParams.searchTitle;
+    }
+
+    char* value = new char[DEFAULT_TEXT_FIELD_LENGTH];
+
+    cout << "Please enter search query: ";
+    cin.ignore(); // discard newline character
+
+    cin.getline(value, DEFAULT_TEXT_FIELD_LENGTH);
+
+    routeParams.searchTitle = value;
 }
 
 void searchGenreQuery(routeParamsType& routeParams, char* value) {

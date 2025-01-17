@@ -18,11 +18,14 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
     } while (operation < ADMIN_SEARCH_TITLE_OPERATION || operation > ADMIN_LOGOUT_OPERATION);
 
     switch (operation) {
-        case ADMIN_ADD_OPERATION:
-            return MOVIES_LIST_ADD_PAGE;
+        case ADMIN_SEARCH_TITLE_OPERATION:
+            searchTitleQuery(routeParams);
+            return MOVIES_LIST_PAGE;
         case ADMIN_SORT_TITLE_OPERATION:
             sortTitleQuery(routeParams);
             return MOVIES_LIST_PAGE;
+        case ADMIN_ADD_OPERATION:
+            return MOVIES_LIST_ADD_PAGE;
         case ADMIN_LOGOUT_OPERATION:
             return LANDING_PAGE;
         default:
@@ -41,7 +44,7 @@ int renderMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
     }
 
     movieType* movies = getMovies(routeParams);
-    int moviesCount = getMoviesCount();
+    int moviesCount = getMoviesCount(routeParams);
 
     printMoviesTable(movies, moviesCount);
 

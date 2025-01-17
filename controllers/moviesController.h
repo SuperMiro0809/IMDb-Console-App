@@ -16,7 +16,7 @@ constexpr int ACTORS_COUNT_COLUMN = 6;
 constexpr int MOVIE_ID_COLUMN = 0;
 constexpr int ACTOR_NAME_COLUMN = 1;
 
-int getMoviesCount();
+int getMoviesCount(routeParamsType routeParams);
 
 void addActorsToMovie(const char* const* actors, int actorsCount, int movieId);
 

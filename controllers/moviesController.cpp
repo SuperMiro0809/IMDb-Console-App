@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-int getMoviesCount() {
+int getMoviesCount(routeParamsType routeParams) {
     ifstream MyFile(MOVIES_DB);
 
     if (!MyFile.is_open()) {
@@ -21,6 +21,13 @@ int getMoviesCount() {
     int count = 0;
 
     while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        char* currentTitle = getColumn(line, TITLE_COLUMN);
+
+        if (routeParams.searchTitle && !searchInText(currentTitle, routeParams.searchTitle)) {
+            delete[] currentTitle;
+            continue;
+        }
+
         count++;
     }
 
@@ -78,7 +85,7 @@ movieType* getMovies(routeParamsType routeParams) {
         return nullptr;
     }
 
-    int moviesCount = getMoviesCount();
+    int moviesCount = getMoviesCount(routeParams);
     movieType* movies = new movieType[moviesCount];
 
     char line[DEFAULT_DB_ROW_SIZE];
@@ -90,6 +97,11 @@ movieType* getMovies(routeParamsType routeParams) {
         delete[] currentId;
 
         char* currentTitle = getColumn(line, TITLE_COLUMN);
+
+        if (routeParams.searchTitle && !searchInText(currentTitle, routeParams.searchTitle)) {
+            delete[] currentTitle;
+            continue;
+        }
 
         char* currentYear = getColumn(line, YEAR_COLUMN);
         int yearNumber = myAtoi(currentYear);
