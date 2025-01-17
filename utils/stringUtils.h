@@ -11,3 +11,5 @@ char* substringBeforeSymbol(const char* str, char symbol);
 char* getColumn(const char* str, int columnIndex);
 
 int myStrCmp(const char* first, const char* second);
+
+int getStringLength(const char* str);

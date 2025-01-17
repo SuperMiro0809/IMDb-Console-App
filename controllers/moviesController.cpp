@@ -2,6 +2,7 @@
 
 #include <constants.h>
 #include <utils/databaseUtils.h>
+#include <utils/stringUtils.h>
 
 #include <fstream>
 #include <iostream>
@@ -22,8 +23,82 @@ void addActorsToMovie(const char* const* actors, int actorsCount, int movieId) {
     MyFile.close();
 }
 
-int getMovies() {
+char** getMovieActors(int movieId, int actorsCount) {
+    ifstream MyFile(ACTORS_DB);
 
+    if (!MyFile.is_open()) {
+        cout << "Error: Unable to open file: " << ACTORS_DB << endl;
+        return nullptr;
+    }
+
+    char** actors = new char* [actorsCount];
+    int index = 0;
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        char* currentId = getColumn(line, MOVIE_ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+
+        delete[] currentId;
+
+        if (idNumber == movieId) {
+            char* currentName = getColumn(line, ACTOR_NAME_COLUMN);
+            actors[index++] = currentName;
+        }
+    }
+
+    MyFile.close();
+    return actors;
+}
+
+movieType* getMovies() {
+    ifstream MoviesDB(MOVIES_DB);
+
+    if (!MoviesDB.is_open()) {
+        cout << "Error: Unable to open file: " << MOVIES_DB << endl;
+        return nullptr;
+    }
+
+    int moviesCount = countRecords(MOVIES_DB);
+    movieType* movies = new movieType[moviesCount];
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    int index = 0;
+
+    while (MoviesDB.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        char* currentId = getColumn(line, ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+        delete[] currentId;
+
+        char* currentTitle = getColumn(line, TITLE_COLUMN);
+
+        char* currentYear = getColumn(line, YEAR_COLUMN);
+        int yearNumber = myAtoi(currentYear);
+        delete[] currentYear;
+
+        char* currentGenre = getColumn(line, GENRE_COLUMN);
+        char* currentDirector = getColumn(line, DIRECTOR_COLUMN);
+        char* currentRating = getColumn(line, RATING_COLUMN);
+
+        char* currentActorsCount = getColumn(line, ACTORS_COUNT_COLUMN);
+        int actorsCountNumber = myAtoi(currentActorsCount);
+        delete[] currentActorsCount;
+
+        char** currentActors = getMovieActors(idNumber, actorsCountNumber);
+
+        movieType currentMovie;
+        currentMovie.id = idNumber;
+        currentMovie.title = currentTitle;
+        currentMovie.year = yearNumber;
+        currentMovie.genre = currentGenre;
+        currentMovie.director = currentDirector;
+        currentMovie.actorsCount = actorsCountNumber;
+        currentMovie.actors = currentActors;
+
+        movies[index++] = currentMovie; 
+    }
+
+    return movies;
 }
 
 int addMovie(const char* title, int year, const char* genre, const char* director, const char* const* actors, int actorsCount) {
@@ -40,7 +115,8 @@ int addMovie(const char* title, int year, const char* genre, const char* directo
     MyFile << year << DEFAULT_DB_DELIMITER;
     MyFile << genre << DEFAULT_DB_DELIMITER;
     MyFile << director << DEFAULT_DB_DELIMITER;
-    MyFile << 5 << '\n';
+    MyFile << 5 << DEFAULT_DB_DELIMITER;
+    MyFile << actorsCount << '\n';
 
     MyFile.close();
 
@@ -55,4 +131,24 @@ int updateMovie(int id) {
 
 int deleteMovie(int id) {
 
+}
+
+void freeUpMoviesSpace(movieType* movies, int length) {
+    if (!movies) {
+        return;
+    }
+
+    for (int i = 0; i < length; i++) {
+        delete[] movies[i].title;
+        delete[] movies[i].genre;
+        delete[] movies[i].director;
+        delete[] movies[i].rating;
+
+        for (int j = 0; j < movies[i].actorsCount; j++) {
+            delete[] movies[i].actors[j];
+        }
+        delete[] movies[i].actors;
+    }
+
+    delete[] movies;
 }

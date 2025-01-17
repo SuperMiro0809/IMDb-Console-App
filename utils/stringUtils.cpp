@@ -84,3 +84,17 @@ int myStrCmp(const char* first, const char* second) {
 
     return *first - *second;
 }
+
+int getStringLength(const char* str) {
+    if (!str) {
+        return 0;
+    }
+
+    int length = 0;
+    while (*str != TERMINATE_SYMBOL) {
+        length++;
+        str++;
+    }
+
+    return length;
+}

@@ -7,6 +7,10 @@
 using namespace std;
 
 int autoIncrement(const char* dbName) {
+    if (!dbName) {
+        return 0;
+    }
+
     ifstream DBFile(dbName);
 
     if (!DBFile.is_open()) {
@@ -33,4 +37,28 @@ int autoIncrement(const char* dbName) {
     DBFile.close();
 
     return currentId + 1;
+}
+
+int countRecords(const char* dbName) {
+    if (!dbName) {
+        return 0;
+    }
+
+    ifstream DBFile(dbName);
+
+    if (!DBFile.is_open()) {
+        cout << "Error: Unable to open file: " << dbName << endl;
+        return -1;
+    }
+
+    int count = 0;
+    char line[DEFAULT_DB_ROW_SIZE];
+
+    while (DBFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        count++;
+    }
+
+    DBFile.close();
+
+    return count;
 }
