@@ -4,7 +4,7 @@
 #include <screens/moviesListAdminScreen.h>
 #include <utils/stringUtils.h>
 
-int renderMoviesListScreen(userType user, routeParamsType& routeParams) {
+int renderMoviesListScreen(userType& user, routeParamsType& routeParams) {
     int userRoleCmp = myStrCmp(user.role, "User");
     int adminRoleCmp = myStrCmp(user.role, "Admin");
 

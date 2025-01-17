@@ -12,4 +12,4 @@ constexpr int LOGOUT_OPERATION = 7;
 
 int actionMoviesListUserScreen();
 
-int renderMoviesListUserScreen(userType user, routeParamsType& routeParams);
+int renderMoviesListUserScreen(userType& user, routeParamsType& routeParams);

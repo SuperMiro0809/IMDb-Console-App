@@ -2,4 +2,4 @@
 
 #include <types.h>
 
-int renderMoviesListScreen(userType user, routeParamsType& routeParams);
+int renderMoviesListScreen(userType& user, routeParamsType& routeParams);
