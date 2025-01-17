@@ -13,3 +13,7 @@ char* getColumn(const char* str, int columnIndex);
 int myStrCmp(const char* first, const char* second);
 
 int getStringLength(const char* str);
+
+bool isPrefix(const char* pattern, const char* text);
+
+bool searchInText(const char* text, const char* pattern);

@@ -98,3 +98,32 @@ int getStringLength(const char* str) {
 
     return length;
 }
+
+bool isPrefix(const char* pattern, const char* text) {
+    if (!pattern || !text) return 0;
+
+    while (*pattern != TERMINATE_SYMBOL) {
+        if (*pattern != *text) {
+            return false;
+        }
+
+        pattern++;
+        text++;
+    }
+
+    return true;
+}
+
+bool searchInText(const char* text, const char* pattern) {
+    if (!text || !pattern) return 0;
+
+    while (*text != TERMINATE_SYMBOL) {
+        if (isPrefix(pattern, text)) {
+            return true;
+        }
+
+        text++;
+    }
+    
+    return false;
+}
