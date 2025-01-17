@@ -4,6 +4,7 @@
 #include <utils/consoleUtils.h>
 #include <colors.h>
 #include <routes.h>
+#include <controllers/moviesController.h>
 
 #include <iostream>
 using namespace std;
@@ -28,6 +29,15 @@ int renderMoviesListAdminScreen(userType user, routeParamsType& routeParams) {
     
     printUserInfo(user.username, user.role);
     printScreenDivider();
+
+    movieType* movies = getMovies();
+    int moviesCount = getMoviesCount();
+
+    printMoviesTable(movies, moviesCount);
+
+    // free up memory used by movies
+    freeUpMoviesSpace(movies, moviesCount);
+
     printScreenText("Please sellect how you want to procceed:");
 
     setConsoleColor(SUCCESS_COLOR);
