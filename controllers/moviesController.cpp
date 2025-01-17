@@ -8,6 +8,24 @@
 #include <iostream>
 using namespace std;
 
+int getMoviesCount() {
+    ifstream MyFile(MOVIES_DB);
+
+    if (!MyFile.is_open()) {
+        cout << "Error: Unable to open file: " << MOVIES_DB << endl;
+        return 0;
+    }
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    int count = 0;
+
+    while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        count++;
+    }
+
+    return count;
+}
+
 void addActorsToMovie(const char* const* actors, int actorsCount, int movieId) {
     if (!actors) {
         return;
@@ -59,7 +77,7 @@ movieType* getMovies() {
         return nullptr;
     }
 
-    int moviesCount = countRecords(MOVIES_DB);
+    int moviesCount = getMoviesCount();
     movieType* movies = new movieType[moviesCount];
 
     char line[DEFAULT_DB_ROW_SIZE];
