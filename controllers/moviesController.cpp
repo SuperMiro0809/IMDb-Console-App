@@ -3,6 +3,7 @@
 #include <constants.h>
 #include <utils/databaseUtils.h>
 #include <utils/stringUtils.h>
+#include <utils/moviesUtils.h>
 
 #include <fstream>
 #include <iostream>
@@ -69,7 +70,7 @@ char** getMovieActors(int movieId, int actorsCount) {
     return actors;
 }
 
-movieType* getMovies() {
+movieType* getMovies(routeParamsType routeParams) {
     ifstream MoviesDB(MOVIES_DB);
 
     if (!MoviesDB.is_open()) {
@@ -116,6 +117,10 @@ movieType* getMovies() {
         movies[index++] = currentMovie; 
     }
 
+    if (routeParams.sortTitle) {
+        sortMoviesByTitle(movies, moviesCount, routeParams.sortTitle);
+    }
+
     return movies;
 }
 
@@ -160,7 +165,6 @@ void freeUpMoviesSpace(movieType* movies, int length) {
         delete[] movies[i].title;
         delete[] movies[i].genre;
         delete[] movies[i].director;
-        delete[] movies[i].rating;
 
         for (int j = 0; j < movies[i].actorsCount; j++) {
             delete[] movies[i].actors[j];
