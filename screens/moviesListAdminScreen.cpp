@@ -5,11 +5,12 @@
 #include <colors.h>
 #include <routes.h>
 #include <controllers/moviesController.h>
+#include <utils/routeParamsUtils.h>
 
 #include <iostream>
 using namespace std;
 
-int actionMoviesListAdminScreen() {
+int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
     int operation;
 
     do {
@@ -19,18 +20,27 @@ int actionMoviesListAdminScreen() {
     switch (operation) {
         case ADMIN_ADD_OPERATION:
             return MOVIES_LIST_ADD_PAGE;
+        case ADMIN_SORT_TITLE_OPERATION:
+            sortTitleQuery(routeParams);
+            return MOVIES_LIST_PAGE;
+        case ADMIN_LOGOUT_OPERATION:
+            return LANDING_PAGE;
         default:
             return EXIT;
     }
 }
 
-int renderMoviesListAdminScreen(userType user, routeParamsType& routeParams) {
+int renderMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
     printScreenHeader("Movies List -", PRIMARY_YELLOW_COLOR, "Internet Movie Database!", SECONDARY_YELLOW_COLOR);
     
     printUserInfo(user.username, user.role);
     printScreenDivider();
 
-    movieType* movies = getMovies();
+    if (routeParams.sortTitle) {
+            cout << routeParams.sortTitle << endl;
+    }
+
+    movieType* movies = getMovies(routeParams);
     int moviesCount = getMoviesCount();
 
     printMoviesTable(movies, moviesCount);
@@ -53,5 +63,5 @@ int renderMoviesListAdminScreen(userType user, routeParamsType& routeParams) {
     cout << ADMIN_LOGOUT_OPERATION << ". Logout" << endl;
     resetConsoleColor();
 
-    return actionMoviesListAdminScreen();
+    return actionMoviesListAdminScreen(user, routeParams);
 }
