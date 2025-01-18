@@ -15,4 +15,4 @@ void sortTitleQuery(routeParamsType& routeParams);
 
 void searchTitleQuery(routeParamsType& routeParams);
 
-void searchGenreQuery(routeParamsType& routeParams, char* value);
+void searchGenreQuery(routeParamsType& routeParams);

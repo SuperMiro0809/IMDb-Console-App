@@ -52,7 +52,7 @@ void searchTitleQuery(routeParamsType& routeParams) {
 
     char* value = new char[DEFAULT_TEXT_FIELD_LENGTH];
 
-    cout << "Please enter search query: ";
+    cout << "Please enter title search query: ";
     cin.ignore(); // discard newline character
 
     cin.getline(value, DEFAULT_TEXT_FIELD_LENGTH);
@@ -60,7 +60,17 @@ void searchTitleQuery(routeParamsType& routeParams) {
     routeParams.searchTitle = value;
 }
 
-void searchGenreQuery(routeParamsType& routeParams, char* value) {
-    delete[] routeParams.searchGenre;
-    routeParams.searchGenre;
+void searchGenreQuery(routeParamsType& routeParams) {
+    if (routeParams.searchGenre) {
+        delete[] routeParams.searchGenre;
+    }
+
+    char* value = new char[DEFAULT_TEXT_FIELD_LENGTH];
+
+    cout << "Please enter genre search query: ";
+    cin.ignore(); // discard newline character
+
+    cin.getline(value, DEFAULT_TEXT_FIELD_LENGTH);
+
+    routeParams.searchGenre = value;
 }

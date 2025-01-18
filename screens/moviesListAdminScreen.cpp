@@ -21,6 +21,9 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
         case ADMIN_SEARCH_TITLE_OPERATION:
             searchTitleQuery(routeParams);
             return MOVIES_LIST_PAGE;
+        case ADMIN_SEARCH_GENRE_OPERATION:
+            searchGenreQuery(routeParams);
+            return MOVIES_LIST_PAGE;
         case ADMIN_SORT_TITLE_OPERATION:
             sortTitleQuery(routeParams);
             return MOVIES_LIST_PAGE;

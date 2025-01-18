@@ -28,6 +28,14 @@ int getMoviesCount(routeParamsType routeParams) {
             continue;
         }
 
+        char* currentGenre = getColumn(line, GENRE_COLUMN);
+
+        if (routeParams.searchGenre && myStrCmp(currentGenre, routeParams.searchGenre) != 0) {
+            delete[] currentTitle;
+            delete[] currentGenre;
+            continue;
+        }
+
         count++;
     }
 
@@ -108,6 +116,13 @@ movieType* getMovies(routeParamsType routeParams) {
         delete[] currentYear;
 
         char* currentGenre = getColumn(line, GENRE_COLUMN);
+
+        if (routeParams.searchGenre && myStrCmp(currentGenre, routeParams.searchGenre) != 0) {
+            delete[] currentTitle;
+            delete[] currentGenre;
+            continue;
+        }
+
         char* currentDirector = getColumn(line, DIRECTOR_COLUMN);
         char* currentRating = getColumn(line, RATING_COLUMN);
 
