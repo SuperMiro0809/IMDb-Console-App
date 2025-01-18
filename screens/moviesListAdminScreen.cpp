@@ -42,9 +42,7 @@ int renderMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
     printUserInfo(user.username, user.role);
     printScreenDivider();
 
-    if (routeParams.sortTitle) {
-            cout << routeParams.sortTitle << endl;
-    }
+    printRouteParams(routeParams);
 
     movieType* movies = getMovies(routeParams);
     int moviesCount = getMoviesCount(routeParams);

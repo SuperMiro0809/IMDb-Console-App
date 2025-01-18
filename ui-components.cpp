@@ -144,3 +144,21 @@ void printMoviesTable(const movieType* movies, int length) {
 
     cout << endl;
 }
+
+void printRouteParams(routeParamsType routeParams) {
+    cout << endl;
+
+    if (routeParams.searchTitle) {
+        cout << "Search title query: " << routeParams.searchTitle << endl;
+    }
+
+    if (routeParams.searchGenre) {
+        cout << "Search genre query: " << routeParams.searchGenre << endl;
+    }
+
+    if (routeParams.sortTitle) {
+        cout << "Sort title direction: " << routeParams.sortTitle << endl;
+    }
+
+    cout << endl;
+}

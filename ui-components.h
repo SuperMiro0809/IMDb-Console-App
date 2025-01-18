@@ -19,3 +19,5 @@ char** printActorsField(int actorsCount, int textColor = DEFAULT_COLOR);
 void printUserInfo(const char* username, const char* role);
 
 void printMoviesTable(const movieType* movies, int length);
+
+void printRouteParams(routeParamsType routeParams);
