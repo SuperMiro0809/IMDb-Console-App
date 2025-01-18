@@ -39,6 +39,7 @@ void sortTitleQuery(routeParamsType& routeParams) {
     } while(myStrCmp(value, ASC_SORT) != 0 && myStrCmp(value, DESC_SORT) != 0 && myStrCmp(value, NO_SORT) != 0);
 
     if (myStrCmp(value, NO_SORT) == 0) {
+        delete[] value;
         routeParams.sortTitle = nullptr;
     } else {
         routeParams.sortTitle = value;
@@ -52,12 +53,17 @@ void searchTitleQuery(routeParamsType& routeParams) {
 
     char* value = new char[DEFAULT_TEXT_FIELD_LENGTH];
 
-    cout << "Please enter title search query: ";
+    cout << "Please enter title search query? " << "< type \"no\" to remove existing filter >: ";
     cin.ignore(); // discard newline character
 
     cin.getline(value, DEFAULT_TEXT_FIELD_LENGTH);
 
-    routeParams.searchTitle = value;
+    if (myStrCmp(value, NO_SEARCH) == 0) {
+        delete[] value;
+        routeParams.searchTitle = nullptr;
+    } else {
+        routeParams.searchTitle = value;
+    }
 }
 
 void searchGenreQuery(routeParamsType& routeParams) {
@@ -67,10 +73,15 @@ void searchGenreQuery(routeParamsType& routeParams) {
 
     char* value = new char[DEFAULT_TEXT_FIELD_LENGTH];
 
-    cout << "Please enter genre search query: ";
+    cout << "Please enter genre search query? " << "< type \"no\" to remove existing filter >: ";
     cin.ignore(); // discard newline character
 
     cin.getline(value, DEFAULT_TEXT_FIELD_LENGTH);
 
-    routeParams.searchGenre = value;
+    if (myStrCmp(value, NO_SEARCH) == 0) {
+        delete[] value;
+        routeParams.searchGenre = nullptr;
+    } else {
+        routeParams.searchGenre = value;
+    }
 }

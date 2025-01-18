@@ -6,6 +6,7 @@ constexpr int INITIAL_SORT_VALUE_SIZE = 5;
 constexpr const char* NO_SORT = "no";
 constexpr const char* ASC_SORT = "asc";
 constexpr const char* DESC_SORT = "desc";
+constexpr const char* NO_SEARCH = "no";
 
 void filterRatingQuery(routeParamsType& routeParams, int min, int max);
 
