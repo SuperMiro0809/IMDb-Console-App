@@ -149,15 +149,24 @@ void printRouteParams(routeParamsType routeParams) {
     cout << endl;
 
     if (routeParams.searchTitle) {
-        cout << "Search title query: " << routeParams.searchTitle << endl;
+        setConsoleColor(SECONDARY_YELLOW_COLOR);
+        cout << "Search title query: ";
+        resetConsoleColor();
+        cout << routeParams.searchTitle << endl;
     }
 
     if (routeParams.searchGenre) {
-        cout << "Search genre query: " << routeParams.searchGenre << endl;
+        setConsoleColor(SECONDARY_YELLOW_COLOR);
+        cout << "Search genre query: ";
+        resetConsoleColor();
+        cout << routeParams.searchGenre << endl;
     }
 
     if (routeParams.sortTitle) {
-        cout << "Sort title direction: " << routeParams.sortTitle << endl;
+        setConsoleColor(SECONDARY_YELLOW_COLOR);
+        cout << "Sort title direction: ";
+        resetConsoleColor();
+        cout << routeParams.sortTitle << endl;
     }
 
     cout << endl;
