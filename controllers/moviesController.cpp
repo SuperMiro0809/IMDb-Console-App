@@ -84,7 +84,7 @@ int getMoviesCount(routeParamsType routeParams) {
     return count;
 }
 
-int getMovieByIdOrTitle(const char* query) {
+int findMovieByIdOrTitle(const char* query) {
     if (!query) {
         return 0;
     }
@@ -243,6 +243,60 @@ movieType* getMovies(routeParamsType routeParams) {
     return movies;
 }
 
+movieType getMovieById(int movieId) {
+    ifstream MoviesDB(MOVIES_DB);
+
+    movieType currentMovie;
+
+    if (!MoviesDB.is_open()) {
+        cout << "Error: Unable to open file: " << MOVIES_DB << endl;
+        return currentMovie;
+    }
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    int index = 0;
+
+    while (MoviesDB.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        char* currentId = getColumn(line, MOVIES_ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+        delete[] currentId;
+
+        if (idNumber == movieId) {
+            char* currentTitle = getColumn(line, MOVIES_TITLE_COLUMN);
+
+            double currentRating = getMovieRating(idNumber);
+
+            char* currentYear = getColumn(line, MOVIES_YEAR_COLUMN);
+            int yearNumber = myAtoi(currentYear);
+            delete[] currentYear;
+
+            char* currentGenre = getColumn(line, MOVIES_GENRE_COLUMN);
+
+            char* currentDirector = getColumn(line, MOVIES_DIRECTOR_COLUMN);
+
+            char* currentActorsCount = getColumn(line, MOVIES_ACTORS_COUNT_COLUMN);
+            int actorsCountNumber = myAtoi(currentActorsCount);
+            delete[] currentActorsCount;
+
+            char** currentActors = getMovieActors(idNumber, actorsCountNumber);
+
+            currentMovie.id = idNumber;
+            currentMovie.title = currentTitle;
+            currentMovie.year = yearNumber;
+            currentMovie.genre = currentGenre;
+            currentMovie.director = currentDirector;
+            currentMovie.rating = currentRating;
+            currentMovie.actorsCount = actorsCountNumber;
+            currentMovie.actors = currentActors;
+
+            return currentMovie;
+        }
+    }
+
+    // not found
+    return currentMovie;
+}
+
 int addMovie(const char* title, int year, const char* genre, const char* director, const char* const* actors, int actorsCount) {
     if (!title || !genre || !director) {
         return 0;
@@ -266,8 +320,18 @@ int addMovie(const char* title, int year, const char* genre, const char* directo
     return nextId;
 }
 
-int updateMovie(int id) {
+int updateMovie(const char* query) {
+    if (!query) {
+        return 0;
+    }
 
+    int foundId = findMovieByIdOrTitle(query);
+
+    if (foundId == 0) {
+        return MOVIE_NOT_FOUND;
+    }
+
+    return 0;
 }
 
 int deleteMovie(const char* query) {
@@ -275,7 +339,7 @@ int deleteMovie(const char* query) {
         return 0;
     }
 
-    int foundId = getMovieByIdOrTitle(query);
+    int foundId = findMovieByIdOrTitle(query);
 
     if (foundId == 0) {
         return MOVIE_NOT_FOUND;
@@ -302,7 +366,7 @@ int addMovieRating(const char* query, int userId, int rating) {
         return INVALID_RATING;
     }
 
-    int foundId = getMovieByIdOrTitle(query);
+    int foundId = findMovieByIdOrTitle(query);
 
     if (foundId == 0) {
         return MOVIE_NOT_FOUND;
