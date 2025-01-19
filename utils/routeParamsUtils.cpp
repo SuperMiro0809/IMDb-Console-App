@@ -11,8 +11,35 @@ void filterRatingQuery(routeParamsType& routeParams, int min, int max) {
     routeParams.filterRatingMax = max;
 }
 
-void sortRatingQuery(routeParamsType& routeParams, char* value) {
-    routeParams.sortRating = value;
+void sortRatingQuery(routeParamsType& routeParams) {
+    if (routeParams.sortRating) {
+        delete[] routeParams.sortRating;
+    }
+
+    char* value = new char[INITIAL_SORT_VALUE_SIZE];
+    bool firstTry = true;
+
+    do {
+        cout << "Please enter how you want to sort? < "
+             << ASC_SORT << " | "
+             << DESC_SORT << " | "
+             << NO_SORT << " >:";
+
+        if (firstTry) {
+            cin.ignore(); // discard newline character
+        }
+
+        cin.getline(value, INITIAL_SORT_VALUE_SIZE);
+
+        firstTry = false;
+    } while(myStrCmp(value, ASC_SORT) != 0 && myStrCmp(value, DESC_SORT) != 0 && myStrCmp(value, NO_SORT) != 0);
+
+    if (myStrCmp(value, NO_SORT) == 0) {
+        delete[] value;
+        routeParams.sortRating = nullptr;
+    } else {
+        routeParams.sortRating = value;
+    }
 }
 
 void sortTitleQuery(routeParamsType& routeParams) {
@@ -24,8 +51,8 @@ void sortTitleQuery(routeParamsType& routeParams) {
     bool firstTry = true;
 
     do {
-        cout << "Please enter how you want to sort? "
-             << "< " << ASC_SORT << " | "
+        cout << "Please enter how you want to sort? < "
+             << ASC_SORT << " | "
              << DESC_SORT << " | "
              << NO_SORT << " >:";
 

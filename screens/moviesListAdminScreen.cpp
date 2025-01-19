@@ -28,6 +28,9 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
         case ADMIN_RATE_OPERATION:
             rateMovieAction(user.id);
             return MOVIES_LIST_PAGE;
+        case ADMIN_SORT_RATING_OPERATION:
+            sortRatingQuery(routeParams);
+            return MOVIES_LIST_PAGE;
         case ADMIN_SORT_TITLE_OPERATION:
             sortTitleQuery(routeParams);
             return MOVIES_LIST_PAGE;

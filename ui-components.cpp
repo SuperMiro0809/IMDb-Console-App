@@ -160,6 +160,13 @@ void printRouteParams(routeParamsType routeParams) {
         cout << routeParams.searchGenre << endl;
     }
 
+    if (routeParams.sortRating) {
+        setConsoleColor(SECONDARY_YELLOW_COLOR);
+        cout << "Sort rating direction: ";
+        resetConsoleColor();
+        cout << routeParams.sortRating << endl;
+    }
+
     if (routeParams.sortTitle) {
         setConsoleColor(SECONDARY_YELLOW_COLOR);
         cout << "Sort title direction: ";

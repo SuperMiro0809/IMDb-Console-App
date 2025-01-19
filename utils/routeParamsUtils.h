@@ -10,7 +10,7 @@ constexpr const char* NO_SEARCH = "no";
 
 void filterRatingQuery(routeParamsType& routeParams, int min, int max);
 
-void sortRatingQuery(routeParamsType& routeParams, char* value);
+void sortRatingQuery(routeParamsType& routeParams);
 
 void sortTitleQuery(routeParamsType& routeParams);
 

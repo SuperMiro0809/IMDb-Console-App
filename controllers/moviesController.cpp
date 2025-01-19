@@ -218,6 +218,10 @@ movieType* getMovies(routeParamsType routeParams) {
         sortMoviesByTitle(movies, moviesCount, routeParams.sortTitle);
     }
 
+    if (routeParams.sortRating) {
+        sortMoviesByRating(movies, moviesCount, routeParams.sortRating);
+    }
+
     return movies;
 }
 
