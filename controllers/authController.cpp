@@ -1,14 +1,17 @@
 #include <controllers/authController.h>
 
-#include <iostream>
-#include <fstream>
+#include <constants.h>
+#include <databaseArchitecture.h>
 #include <utils/databaseUtils.h>
 #include <utils/stringUtils.h>
 #include <errorCodes.h>
+
+#include <fstream>
+#include <iostream>
 using namespace std;
 
 bool checkIfUserExists(const char* username) {
-    ifstream MyFile(USER_DB);
+    ifstream MyFile(USERS_DB);
 
     if (!MyFile.is_open()) {
         cout << "Error: Unable to open file: users.txt" << endl;
@@ -18,7 +21,7 @@ bool checkIfUserExists(const char* username) {
     char line[DEFAULT_DB_ROW_SIZE];
 
     while (MyFile >> line) {
-        char* currentUsername = getColumn(line, USERNAME_COLUMN);
+        char* currentUsername = getColumn(line, USERS_USERNAME_COLUMN);
 
         int cmp = myStrCmp(username, currentUsername);
 
@@ -51,10 +54,10 @@ int registerUser(const char* username, const char* password, const char* repeatP
         return USER_ALREDY_EXISTS;
     }
 
-    ofstream MyFile(USER_DB, ios::app); // open file in append mode
+    ofstream MyFile(USERS_DB, ios::app); // open file in append mode
 
     // save record
-    int nextId = autoIncrement(USER_DB);
+    int nextId = autoIncrement(USERS_DB);
     MyFile << nextId << DEFAULT_DB_DELIMITER;
     MyFile << username << DEFAULT_DB_DELIMITER;
     MyFile << password << DEFAULT_DB_DELIMITER;
@@ -69,7 +72,7 @@ int loginUser(const char* username, const char* password) {
         return 0;
     }
 
-    ifstream MyFile(USER_DB);
+    ifstream MyFile(USERS_DB);
 
     if (!MyFile.is_open()) {
         cout << "Error: Unable to open file: users.txt" << endl;
@@ -79,9 +82,9 @@ int loginUser(const char* username, const char* password) {
     char line[DEFAULT_DB_ROW_SIZE];
 
     while (MyFile >> line) {
-        char* currentId = getColumn(line, ID_COLUMN);
-        char* currentUsername = getColumn(line, USERNAME_COLUMN);
-        char* currentPassword = getColumn(line, PASSWORD_COLUMN);
+        char* currentId = getColumn(line, USERS_ID_COLUMN);
+        char* currentUsername = getColumn(line, USERS_USERNAME_COLUMN);
+        char* currentPassword = getColumn(line, USERS_PASSWORD_COLUMN);
 
         int cmpUsername = myStrCmp(username, currentUsername);
         int cmpPassword = myStrCmp(password, currentPassword);
@@ -102,18 +105,18 @@ int loginUser(const char* username, const char* password) {
 }
 
 userType getUserById(int id) {
-    ifstream MyFile(USER_DB);
+    ifstream MyFile(USERS_DB);
 
     char line[DEFAULT_DB_ROW_SIZE];
     while (MyFile >> line) {
-        char* currentId = getColumn(line, ID_COLUMN);
+        char* currentId = getColumn(line, USERS_ID_COLUMN);
         int idNumber = myAtoi(currentId);
 
         delete[] currentId;
 
         if (idNumber == id) {
-            char* currentUsername = getColumn(line, USERNAME_COLUMN);
-            char* currentRole = getColumn(line, ROLE_COLUMN);
+            char* currentUsername = getColumn(line, USERS_USERNAME_COLUMN);
+            char* currentRole = getColumn(line, USERS_ROLE_COLUMN);
 
             userType currentUser;
             currentUser.id = idNumber;

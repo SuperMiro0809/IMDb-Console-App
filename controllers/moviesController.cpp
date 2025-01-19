@@ -1,6 +1,7 @@
 #include <controllers/moviesController.h>
 
 #include <constants.h>
+#include <databaseArchitecture.h>
 #include <utils/databaseUtils.h>
 #include <utils/stringUtils.h>
 #include <utils/moviesUtils.h>
@@ -21,14 +22,14 @@ int getMoviesCount(routeParamsType routeParams) {
     int count = 0;
 
     while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
-        char* currentTitle = getColumn(line, TITLE_COLUMN);
+        char* currentTitle = getColumn(line, MOVIES_TITLE_COLUMN);
 
         if (routeParams.searchTitle && !searchInText(currentTitle, routeParams.searchTitle)) {
             delete[] currentTitle;
             continue;
         }
 
-        char* currentGenre = getColumn(line, GENRE_COLUMN);
+        char* currentGenre = getColumn(line, MOVIES_GENRE_COLUMN);
 
         if (routeParams.searchGenre && myStrCmp(currentGenre, routeParams.searchGenre) != 0) {
             delete[] currentTitle;
@@ -70,13 +71,13 @@ char** getMovieActors(int movieId, int actorsCount) {
 
     char line[DEFAULT_DB_ROW_SIZE];
     while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
-        char* currentId = getColumn(line, MOVIE_ID_COLUMN);
+        char* currentId = getColumn(line, ACTORS_MOVIE_ID_COLUMN);
         int idNumber = myAtoi(currentId);
 
         delete[] currentId;
 
         if (idNumber == movieId) {
-            char* currentName = getColumn(line, ACTOR_NAME_COLUMN);
+            char* currentName = getColumn(line, ACTORS_NAME_COLUMN);
             actors[index++] = currentName;
         }
     }
@@ -100,22 +101,22 @@ movieType* getMovies(routeParamsType routeParams) {
     int index = 0;
 
     while (MoviesDB.getline(line, DEFAULT_DB_ROW_SIZE)) {
-        char* currentId = getColumn(line, ID_COLUMN);
+        char* currentId = getColumn(line, MOVIES_ID_COLUMN);
         int idNumber = myAtoi(currentId);
         delete[] currentId;
 
-        char* currentTitle = getColumn(line, TITLE_COLUMN);
+        char* currentTitle = getColumn(line, MOVIES_TITLE_COLUMN);
 
         if (routeParams.searchTitle && !searchInText(currentTitle, routeParams.searchTitle)) {
             delete[] currentTitle;
             continue;
         }
 
-        char* currentYear = getColumn(line, YEAR_COLUMN);
+        char* currentYear = getColumn(line, MOVIES_YEAR_COLUMN);
         int yearNumber = myAtoi(currentYear);
         delete[] currentYear;
 
-        char* currentGenre = getColumn(line, GENRE_COLUMN);
+        char* currentGenre = getColumn(line, MOVIES_GENRE_COLUMN);
 
         if (routeParams.searchGenre && myStrCmp(currentGenre, routeParams.searchGenre) != 0) {
             delete[] currentTitle;
@@ -123,10 +124,10 @@ movieType* getMovies(routeParamsType routeParams) {
             continue;
         }
 
-        char* currentDirector = getColumn(line, DIRECTOR_COLUMN);
-        char* currentRating = getColumn(line, RATING_COLUMN);
+        char* currentDirector = getColumn(line, MOVIES_DIRECTOR_COLUMN);
+        char* currentRating = getColumn(line, MOVIES_RATING_COLUMN);
 
-        char* currentActorsCount = getColumn(line, ACTORS_COUNT_COLUMN);
+        char* currentActorsCount = getColumn(line, MOVIES_ACTORS_COUNT_COLUMN);
         int actorsCountNumber = myAtoi(currentActorsCount);
         delete[] currentActorsCount;
 
