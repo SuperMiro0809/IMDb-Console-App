@@ -144,3 +144,23 @@ void searchGenreQuery(routeParamsType& routeParams) {
         routeParams.searchGenre = value;
     }
 }
+
+void resetRouteParams(routeParamsType& routeParams) {
+    if (routeParams.searchTitle) {
+        delete[] routeParams.searchTitle;
+    }
+
+    if (routeParams.searchGenre) {
+        delete[] routeParams.searchGenre;
+    }
+
+    if (routeParams.sortTitle) {
+        delete[] routeParams.sortTitle;
+    }
+
+    if (routeParams.sortRating) {
+        delete[] routeParams.sortRating;
+    }
+
+    routeParams = INITIAL_ROUTE_PARAMS;
+}

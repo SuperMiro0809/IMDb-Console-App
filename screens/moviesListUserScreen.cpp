@@ -56,6 +56,7 @@ int actionMoviesListUserScreen(userType& user, routeParamsType& routeParams) {
             return MOVIES_LIST_PAGE;
         case USER_LOGOUT_OPERATION:
             logoutUser(user);
+            resetRouteParams(routeParams); // reset route params on logout
             return LANDING_PAGE;
         default:
             return EXIT;

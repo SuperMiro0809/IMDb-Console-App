@@ -32,3 +32,5 @@ void sortTitleQuery(routeParamsType& routeParams);
 void searchTitleQuery(routeParamsType& routeParams);
 
 void searchGenreQuery(routeParamsType& routeParams);
+
+void resetRouteParams(routeParamsType& routeParams);
