@@ -18,7 +18,7 @@ int addMovie(const char* title, int year, const char* genre, const char* directo
 
 int updateMovie(int id);
 
-int deleteMovie(int id);
+int deleteMovie(const char* query);
 
 int addMovieRating(const char* query, int userId, int rating);
 

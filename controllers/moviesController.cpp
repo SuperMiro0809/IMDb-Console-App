@@ -85,6 +85,10 @@ int getMoviesCount(routeParamsType routeParams) {
 }
 
 int getMovieByIdOrTitle(const char* query) {
+    if (!query) {
+        return 0;
+    }
+
     ifstream MoviesDB(MOVIES_DB);
 
     if (!MoviesDB.is_open()) {
@@ -266,12 +270,34 @@ int updateMovie(int id) {
 
 }
 
-int deleteMovie(int id) {
+int deleteMovie(const char* query) {
+    if (!query) {
+        return 0;
+    }
 
+    int foundId = getMovieByIdOrTitle(query);
+
+    if (foundId == 0) {
+        return MOVIE_NOT_FOUND;
+    }
+
+    // delete information in Movies file
+    deleteRecord(MOVIES_DB, foundId, MOVIES_ID_COLUMN);
+
+    // delete information in Actors file
+    deleteRecord(ACTORS_DB, foundId, ACTORS_MOVIE_ID_COLUMN);
+
+    // delete information in Ratings file
+    deleteRecord(RATINGS_DB, foundId, RATINGS_MOVIE_ID_COLUMN);
+
+    return 0;
 }
 
 int addMovieRating(const char* query, int userId, int rating) {
-    // no nullptr check because because movie search is by title OR by id
+    if (!query) {
+        return 0;
+    }
+
     if (rating < 1 || rating > 10) {
         return INVALID_RATING;
     }

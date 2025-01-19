@@ -2,4 +2,4 @@
 
 int autoIncrement(const char* dbName);
 
-int countRecords(const char* dbName);
+void deleteRecord(const char* dbName, int queryId, int queryColumn);

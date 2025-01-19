@@ -37,6 +37,9 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
             return MOVIES_LIST_PAGE;
         case ADMIN_ADD_OPERATION:
             return MOVIES_LIST_ADD_PAGE;
+        case ADMIN_DELETE_OPERATION:
+            deleteMovieAction();
+            return MOVIES_LIST_PAGE;
         case ADMIN_LOGOUT_OPERATION:
             logoutUser(user);
             return LANDING_PAGE;

@@ -18,8 +18,27 @@ void rateMovieAction(int userId) {
 
         result = addMovieRating(query, userId, rating);
 
+        delete[] query;
+
         if (result == MOVIE_NOT_FOUND || result == INVALID_RATING) {
             printError(result);
         }
     } while (result == MOVIE_NOT_FOUND || result == INVALID_RATING);
+}
+
+void deleteMovieAction() {
+    int result = 0;
+    do {
+        cin.ignore(); // discard newline character
+
+        char* query = printTextField("Enter movie title or movie id:");
+
+        result = deleteMovie(query);
+
+        delete[] query;
+
+        if (result == MOVIE_NOT_FOUND) {
+            printError(result);
+        }
+    } while (result == MOVIE_NOT_FOUND);
 }
