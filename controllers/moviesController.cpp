@@ -320,16 +320,57 @@ int addMovie(const char* title, int year, const char* genre, const char* directo
     return nextId;
 }
 
-int updateMovie(const char* query) {
-    if (!query) {
+int updateMovie(movieType movie) {
+    ifstream MoviesDB(MOVIES_DB);
+    if (!MoviesDB.is_open()) {
+        cout << "Error: Unable to open file: " << MOVIES_DB << endl;
         return 0;
     }
 
-    int foundId = findMovieByIdOrTitle(query);
-
-    if (foundId == 0) {
-        return MOVIE_NOT_FOUND;
+    // temporary file to store updated content
+    ofstream TempFile("temp.txt");
+    if (!TempFile.is_open()) {
+        cout << "Error: Unable to open file: temp.txt" << endl;
+        return 0;
     }
+
+    char line[DEFAULT_DB_ROW_SIZE];
+
+    while (MoviesDB.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        char* currentId = getColumn(line, MOVIES_ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+        delete[] currentId;
+
+        if (idNumber == movie.id) {
+            TempFile << movie.id << DEFAULT_DB_DELIMITER;
+            TempFile << movie.title << DEFAULT_DB_DELIMITER;
+            TempFile << movie.year << DEFAULT_DB_DELIMITER;
+            TempFile << movie.genre << DEFAULT_DB_DELIMITER;
+            TempFile << movie.director << DEFAULT_DB_DELIMITER;
+            TempFile << movie.actorsCount << '\n';
+        } else {
+            TempFile << line << '\n';
+        }
+    }
+
+    MoviesDB.close();
+    TempFile.close();
+
+    if (remove(MOVIES_DB) != 0) {
+        cout << "Error: Deleting file: " << MOVIES_DB << endl;
+        return 0;
+    }
+
+    if (rename("temp.txt", MOVIES_DB) != 0) {
+        cout << "Error: Renaming file temp.txt to " << MOVIES_DB << endl;
+        return 0;
+    }
+
+    // remove old movie actors
+    deleteRecord(ACTORS_DB, movie.id, ACTORS_MOVIE_ID_COLUMN);
+
+    // add new movie actors
+    addActorsToMovie(movie.actors, movie.actorsCount, movie.id);
 
     return 0;
 }
@@ -383,20 +424,24 @@ int addMovieRating(const char* query, int userId, int rating) {
     return 0;
 }
 
+void freeUpMovieSpace(movieType movie) {
+    delete[] movie.title;
+    delete[] movie.genre;
+    delete[] movie.director;
+
+    for (int i = 0; i < movie.actorsCount; i++) {
+        delete[] movie.actors[i];
+    }
+    delete[] movie.actors;
+}
+
 void freeUpMoviesSpace(movieType* movies, int length) {
     if (!movies) {
         return;
     }
 
     for (int i = 0; i < length; i++) {
-        delete[] movies[i].title;
-        delete[] movies[i].genre;
-        delete[] movies[i].director;
-
-        for (int j = 0; j < movies[i].actorsCount; j++) {
-            delete[] movies[i].actors[j];
-        }
-        delete[] movies[i].actors;
+        freeUpMovieSpace(movies[i]);
     }
 
     delete[] movies;

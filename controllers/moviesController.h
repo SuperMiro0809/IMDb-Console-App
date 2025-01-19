@@ -18,10 +18,12 @@ movieType getMovieById(int movieId);
 
 int addMovie(const char* title, int year, const char* genre, const char* director, const char* const* actors, int actorsCount);
 
-int updateMovie(const char* query);
+int updateMovie(movieType movie);
 
 int deleteMovie(const char* query);
 
 int addMovieRating(const char* query, int userId, int rating);
+
+void freeUpMovieSpace(movieType movie);
 
 void freeUpMoviesSpace(movieType* movies, int length);

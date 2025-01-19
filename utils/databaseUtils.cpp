@@ -62,6 +62,7 @@ void deleteRecord(const char* dbName, int queryId, int queryColumn) {
     while (DBFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
         char* currentQueryColumn = getColumn(line, queryColumn);
         int queryColumnNumber = myAtoi(currentQueryColumn);
+        delete[] currentQueryColumn;
 
         if (queryColumnNumber != queryId) {
             TempFile << line << '\n';
