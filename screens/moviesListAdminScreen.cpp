@@ -26,9 +26,6 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
         case ADMIN_SEARCH_GENRE_OPERATION:
             searchGenreQuery(routeParams);
             return MOVIES_LIST_PAGE;
-        case ADMIN_RATE_OPERATION:
-            rateMovieAction(user.id);
-            return MOVIES_LIST_PAGE;
         case ADMIN_SORT_RATING_OPERATION:
             sortRatingQuery(routeParams);
             return MOVIES_LIST_PAGE;
@@ -69,7 +66,6 @@ int renderMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
     setConsoleColor(SUCCESS_COLOR);
     cout << ADMIN_SEARCH_TITLE_OPERATION << ". Search movie by title" << endl;
     cout << ADMIN_SEARCH_GENRE_OPERATION << ". Search movie by genre" << endl;
-    cout << ADMIN_RATE_OPERATION << ". Rate a movie" << endl;
     cout << ADMIN_SORT_RATING_OPERATION << ". Sort movies by rating" << endl;
     cout << ADMIN_SORT_TITLE_OPERATION << ". Sort movies by title" << endl;
     cout << ADMIN_FILTER_RATING_OPERATION << ". Filter movies by rating" << endl;
