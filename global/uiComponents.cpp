@@ -117,6 +117,12 @@ void printMoviesTable(const movieType* movies, int length) {
 
     printScreenDivider(80);
 
+    if (length == 0) {
+        setConsoleColor(SECONDARY_YELLOW_COLOR);
+        cout << "No movies found" << endl;
+        resetConsoleColor();
+    }
+
     for (int i = 0; i < length; i++) {
         cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << left << movies[i].id
              << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].title
