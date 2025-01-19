@@ -4,6 +4,7 @@
 #include <utils/consoleUtils.h>
 #include <global/routes.h>
 #include <global/colors.h>
+#include <global/appOperations.h>
 
 #include <iostream>
 using namespace std;

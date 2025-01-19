@@ -1,9 +1,10 @@
 #include <screens/moviesListUserScreen.h>
 
 #include <global/uiComponents.h>
-#include <utils/consoleUtils.h>
 #include <global/colors.h>
 #include <global/routes.h>
+#include <global/appOperations.h>
+#include <utils/consoleUtils.h>
 #include <controllers/moviesController.h>
 
 #include <iostream>
@@ -14,7 +15,7 @@ int actionMoviesListUserScreen() {
 
     do {
         cin >> operation;
-    } while (operation < SEARCH_TITLE_OPERATION || operation > LOGOUT_OPERATION);
+    } while (operation < SEARCH_TITLE_OPERATION || operation > USER_LOGOUT_OPERATION);
 
     switch (operation) {
         default:
@@ -45,7 +46,7 @@ int renderMoviesListUserScreen(userType& user, routeParamsType& routeParams) {
     cout << SORT_RATING_OPERATION << ". Sort movies by rating" << endl;
     cout << SORT_TITLE_OPERATION << ". Sort movies by title" << endl;
     cout << FILTER_RATING_OPERATION << ". Filter movies by rating" << endl;
-    cout << LOGOUT_OPERATION << ". Logout" << endl;
+    cout << USER_LOGOUT_OPERATION << ". Logout" << endl;
     resetConsoleColor();
 
     return actionMoviesListUserScreen();

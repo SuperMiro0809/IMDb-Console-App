@@ -1,13 +1,14 @@
 #include <screens/moviesListAdminScreen.h>
 
 #include <global/uiComponents.h>
-#include <utils/consoleUtils.h>
 #include <global/colors.h>
 #include <global/routes.h>
+#include <global/appOperations.h>
 #include <controllers/moviesController.h>
 #include <controllers/authController.h>
 #include <utils/routeParamsUtils.h>
 #include <utils/moviesListUtils.h>
+#include <utils/consoleUtils.h>
 
 #include <iostream>
 using namespace std;
@@ -17,22 +18,22 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
 
     do {
         cin >> operation;
-    } while (operation < ADMIN_SEARCH_TITLE_OPERATION || operation > ADMIN_LOGOUT_OPERATION);
+    } while (operation < SEARCH_TITLE_OPERATION || operation > ADMIN_LOGOUT_OPERATION);
 
     switch (operation) {
-        case ADMIN_SEARCH_TITLE_OPERATION:
+        case SEARCH_TITLE_OPERATION:
             searchTitleQuery(routeParams);
             return MOVIES_LIST_PAGE;
-        case ADMIN_SEARCH_GENRE_OPERATION:
+        case SEARCH_GENRE_OPERATION:
             searchGenreQuery(routeParams);
             return MOVIES_LIST_PAGE;
-        case ADMIN_SORT_RATING_OPERATION:
+        case SORT_RATING_OPERATION:
             sortRatingQuery(routeParams);
             return MOVIES_LIST_PAGE;
-        case ADMIN_SORT_TITLE_OPERATION:
+        case SORT_TITLE_OPERATION:
             sortTitleQuery(routeParams);
             return MOVIES_LIST_PAGE;
-        case ADMIN_FILTER_RATING_OPERATION:
+        case FILTER_RATING_OPERATION:
             filterRatingQuery(routeParams);
             return MOVIES_LIST_PAGE;
         case ADMIN_ADD_OPERATION:
@@ -70,11 +71,11 @@ int renderMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
     printScreenText("Please sellect how you want to procceed:");
 
     setConsoleColor(SUCCESS_COLOR);
-    cout << ADMIN_SEARCH_TITLE_OPERATION << ". Search movie by title" << endl;
-    cout << ADMIN_SEARCH_GENRE_OPERATION << ". Search movie by genre" << endl;
-    cout << ADMIN_SORT_RATING_OPERATION << ". Sort movies by rating" << endl;
-    cout << ADMIN_SORT_TITLE_OPERATION << ". Sort movies by title" << endl;
-    cout << ADMIN_FILTER_RATING_OPERATION << ". Filter movies by rating" << endl;
+    cout << SEARCH_TITLE_OPERATION << ". Search movie by title" << endl;
+    cout << SEARCH_GENRE_OPERATION << ". Search movie by genre" << endl;
+    cout << SORT_RATING_OPERATION << ". Sort movies by rating" << endl;
+    cout << SORT_TITLE_OPERATION << ". Sort movies by title" << endl;
+    cout << FILTER_RATING_OPERATION << ". Filter movies by rating" << endl;
     cout << ADMIN_ADD_OPERATION << ". Add new movie" << endl;
     cout << ADMIN_UPDATE_OPERATION << ". Update a movie" << endl;
     cout << ADMIN_DELETE_OPERATION << ". Delete a movie" << endl;
