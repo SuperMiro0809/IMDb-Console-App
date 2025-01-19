@@ -2,6 +2,6 @@
 
 #include <global/types.h>
 
-int actionMoviesListUserScreen();
+int actionMoviesListUserScreen(userType& user, routeParamsType& routeParams);
 
 int renderMoviesListUserScreen(userType& user, routeParamsType& routeParams);

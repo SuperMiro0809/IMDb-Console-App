@@ -5,12 +5,15 @@
 #include <global/routes.h>
 #include <global/appOperations.h>
 #include <utils/consoleUtils.h>
+#include <utils/routeParamsUtils.h>
+#include <utils/moviesListUtils.h>
 #include <controllers/moviesController.h>
+#include <controllers/authController.h>
 
 #include <iostream>
 using namespace std;
 
-int actionMoviesListUserScreen() {
+int actionMoviesListUserScreen(userType& user, routeParamsType& routeParams) {
     int operation;
 
     do {
@@ -18,6 +21,27 @@ int actionMoviesListUserScreen() {
     } while (operation < SEARCH_TITLE_OPERATION || operation > USER_LOGOUT_OPERATION);
 
     switch (operation) {
+        case SEARCH_TITLE_OPERATION:
+            searchTitleQuery(routeParams);
+            return MOVIES_LIST_PAGE;
+        case SEARCH_GENRE_OPERATION:
+            searchGenreQuery(routeParams);
+            return MOVIES_LIST_PAGE;
+        case RATE_OPERATION:
+            rateMovieAction(user.id);
+            return MOVIES_LIST_PAGE;
+        case SORT_RATING_OPERATION:
+            sortRatingQuery(routeParams);
+            return MOVIES_LIST_PAGE;
+        case SORT_TITLE_OPERATION:
+            sortTitleQuery(routeParams);
+            return MOVIES_LIST_PAGE;
+        case FILTER_RATING_OPERATION:
+            filterRatingQuery(routeParams);
+            return MOVIES_LIST_PAGE;
+        case USER_LOGOUT_OPERATION:
+            logoutUser(user);
+            return LANDING_PAGE;
         default:
             return EXIT;
     }
@@ -28,6 +52,8 @@ int renderMoviesListUserScreen(userType& user, routeParamsType& routeParams) {
 
     printUserInfo(user.username, user.role);
     printScreenDivider();
+
+    printRouteParams(routeParams);
 
     movieType* movies = getMovies(routeParams);
     int moviesCount = getMoviesCount(routeParams);
@@ -49,5 +75,5 @@ int renderMoviesListUserScreen(userType& user, routeParamsType& routeParams) {
     cout << USER_LOGOUT_OPERATION << ". Logout" << endl;
     resetConsoleColor();
 
-    return actionMoviesListUserScreen();
+    return actionMoviesListUserScreen(user, routeParams);
 }
