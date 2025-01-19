@@ -17,6 +17,12 @@ void filterRatingQuery(routeParamsType& routeParams) {
 }
 
 void sortRatingQuery(routeParamsType& routeParams) {
+    // remove other sorting if there is one
+    if (routeParams.sortTitle) {
+        delete[] routeParams.sortTitle;
+        routeParams.sortTitle = nullptr;
+    }
+
     if (routeParams.sortRating) {
         delete[] routeParams.sortRating;
     }
@@ -48,6 +54,12 @@ void sortRatingQuery(routeParamsType& routeParams) {
 }
 
 void sortTitleQuery(routeParamsType& routeParams) {
+    // remove other sorting if there is one
+    if (routeParams.sortRating) {
+        delete[] routeParams.sortRating;
+        routeParams.sortRating = nullptr;
+    }
+
     if (routeParams.sortTitle) {
         delete[] routeParams.sortTitle;
     }
