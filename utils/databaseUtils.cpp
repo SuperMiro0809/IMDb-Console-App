@@ -22,9 +22,7 @@ int autoIncrement(const char* dbName) {
     char line[DEFAULT_DB_ROW_SIZE];
     int currentId = 0;
 
-    while (!DBFile.eof()) {
-        DBFile >> line;
-
+    while (DBFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
         char* idStr = substringBeforeSymbol(line, DEFAULT_DB_DELIMITER);
         int idColumn = myAtoi(idStr);
         
