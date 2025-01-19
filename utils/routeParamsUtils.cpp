@@ -6,9 +6,14 @@
 #include <iostream>
 using namespace std;
 
-void filterRatingQuery(routeParamsType& routeParams, int min, int max) {
-    routeParams.filterRatingMin = min;
-    routeParams.filterRatingMax = max;
+void filterRatingQuery(routeParamsType& routeParams) {
+    int value = 1;
+    do {
+        cout << "Please enter rating filter criteria (1 - 10): ";
+        cin >> value;
+    } while (value < 1 || value > 10);
+
+    routeParams.filterRating = value;
 }
 
 void sortRatingQuery(routeParamsType& routeParams) {

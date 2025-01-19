@@ -9,15 +9,14 @@ struct userType {
 constexpr userType GUEST = { -1, nullptr, nullptr };
 
 struct routeParamsType {
-    int filterRatingMin;
-    int filterRatingMax;
+    int filterRating;
     char* sortTitle; // nullptr | asc | desc
     char* sortRating; // nullptr | asc | desc
     char* searchTitle;
     char* searchGenre;
 };
 
-constexpr routeParamsType INITIAL_ROUTE_PARAMS = { -1, -1, nullptr, nullptr, nullptr, nullptr };
+constexpr routeParamsType INITIAL_ROUTE_PARAMS = { 1, nullptr, nullptr, nullptr, nullptr };
 
 struct movieType {
     int id;

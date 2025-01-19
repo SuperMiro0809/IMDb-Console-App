@@ -174,5 +174,12 @@ void printRouteParams(routeParamsType routeParams) {
         cout << routeParams.sortTitle << endl;
     }
 
+    if (routeParams.filterRating > 1) {
+        setConsoleColor(SECONDARY_YELLOW_COLOR);
+        cout << "Minimum rating: ";
+        resetConsoleColor();
+        cout << routeParams.filterRating << endl;
+    }
+
     cout << endl;
 }

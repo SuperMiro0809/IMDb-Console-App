@@ -2,6 +2,8 @@
 
 #include <types.h>
 
+double getMovieRating(int movieId);
+
 int getMoviesCount(routeParamsType routeParams);
 
 int getMovieByIdOrTitle(const char* query);
@@ -9,8 +11,6 @@ int getMovieByIdOrTitle(const char* query);
 void addActorsToMovie(const char* const* actors, int actorsCount, int movieId);
 
 char** getMovieActors(int movieId, int actorsCount);
-
-double getMovieRating(int movieId);
 
 movieType* getMovies(routeParamsType routeParams);
 

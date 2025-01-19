@@ -11,6 +11,36 @@
 #include <iostream>
 using namespace std;
 
+double getMovieRating(int movieId) {
+    ifstream MyFile(RATINGS_DB);
+
+    if (!MyFile.is_open()) {
+        cout << "Error: Unable to open file: " << RATINGS_DB << endl;
+        return 0;
+    }
+
+    int count = 1;
+    int ratingSum = DEFAULT_MOVIE_RATING;
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    while (MyFile >> line) {
+        char* currentId = getColumn(line, RATINGS_MOVIE_ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+        delete[] currentId;
+
+        if (movieId == idNumber) {
+            char* currentRating = getColumn(line, RATINGS_RATING_COLUMN);
+            int ratingNumber = myAtoi(currentId);
+            delete[] currentRating;
+
+            count++;
+            ratingSum += ratingNumber;
+        }
+    }
+
+    return ratingSum / count;
+}
+
 int getMoviesCount(routeParamsType routeParams) {
     ifstream MyFile(MOVIES_DB);
 
@@ -23,6 +53,16 @@ int getMoviesCount(routeParamsType routeParams) {
     int count = 0;
 
     while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        char* currentId = getColumn(line, MOVIES_ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+        delete[] currentId;
+
+        double currentRating = getMovieRating(idNumber);
+
+        if (currentRating < routeParams.filterRating) {
+            continue;
+        }
+
         char* currentTitle = getColumn(line, MOVIES_TITLE_COLUMN);
 
         if (routeParams.searchTitle && !searchInText(currentTitle, routeParams.searchTitle)) {
@@ -123,36 +163,6 @@ char** getMovieActors(int movieId, int actorsCount) {
     return actors;
 }
 
-double getMovieRating(int movieId) {
-    ifstream MyFile(RATINGS_DB);
-
-    if (!MyFile.is_open()) {
-        cout << "Error: Unable to open file: " << RATINGS_DB << endl;
-        return 0;
-    }
-
-    int count = 1;
-    int ratingSum = DEFAULT_MOVIE_RATING;
-
-    char line[DEFAULT_DB_ROW_SIZE];
-    while (MyFile >> line) {
-        char* currentId = getColumn(line, RATINGS_MOVIE_ID_COLUMN);
-        int idNumber = myAtoi(currentId);
-        delete[] currentId;
-
-        if (movieId == idNumber) {
-            char* currentRating = getColumn(line, RATINGS_RATING_COLUMN);
-            int ratingNumber = myAtoi(currentId);
-            delete[] currentRating;
-
-            count++;
-            ratingSum += ratingNumber;
-        }
-    }
-
-    return ratingSum / count;
-}
-
 movieType* getMovies(routeParamsType routeParams) {
     ifstream MoviesDB(MOVIES_DB);
 
@@ -171,6 +181,12 @@ movieType* getMovies(routeParamsType routeParams) {
         char* currentId = getColumn(line, MOVIES_ID_COLUMN);
         int idNumber = myAtoi(currentId);
         delete[] currentId;
+
+        double currentRating = getMovieRating(idNumber);
+
+        if (currentRating < routeParams.filterRating) {
+            continue;
+        }
 
         char* currentTitle = getColumn(line, MOVIES_TITLE_COLUMN);
 
@@ -198,8 +214,6 @@ movieType* getMovies(routeParamsType routeParams) {
         delete[] currentActorsCount;
 
         char** currentActors = getMovieActors(idNumber, actorsCountNumber);
-
-        double currentRating = getMovieRating(idNumber);
 
         movieType currentMovie;
         currentMovie.id = idNumber;
