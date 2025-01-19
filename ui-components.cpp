@@ -108,13 +108,12 @@ void printMoviesTable(const movieType* movies, int length) {
         return;
     }
 
-    cout << endl;
-
     // print the table header
     cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << left << "ID"
          << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Title"
          << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Year"
-         << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Genre" << endl;
+         << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Genre"
+         << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << "Rating" << endl;
 
     printScreenDivider(80);
 
@@ -122,7 +121,8 @@ void printMoviesTable(const movieType* movies, int length) {
         cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << left << movies[i].id
              << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].title
              << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].year
-             << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].genre << endl;
+             << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].genre
+             << setw(DEFAULT_TABLE_COLUMN_SIZE) << left << movies[i].rating << endl;
 
         cout << setw(DEFAULT_TABLE_ID_COLUMN_SIZE) << ""
              << "Director: " << movies[i].director << endl;
@@ -146,8 +146,6 @@ void printMoviesTable(const movieType* movies, int length) {
 }
 
 void printRouteParams(routeParamsType routeParams) {
-    cout << endl;
-
     if (routeParams.searchTitle) {
         setConsoleColor(SECONDARY_YELLOW_COLOR);
         cout << "Search title query: ";

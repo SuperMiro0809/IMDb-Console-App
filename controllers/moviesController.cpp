@@ -47,6 +47,11 @@ int getMoviesCount(routeParamsType routeParams) {
 int getMovieByIdOrTitle(const char* query) {
     ifstream MoviesDB(MOVIES_DB);
 
+    if (!MoviesDB.is_open()) {
+        cout << "Error: Unable to open file: " << MOVIES_DB << endl;
+        return 0;
+    }
+
     char line[DEFAULT_DB_ROW_SIZE];
     int foundId = 0;
 
@@ -118,6 +123,36 @@ char** getMovieActors(int movieId, int actorsCount) {
     return actors;
 }
 
+double getMovieRating(int movieId) {
+    ifstream MyFile(RATINGS_DB);
+
+    if (!MyFile.is_open()) {
+        cout << "Error: Unable to open file: " << RATINGS_DB << endl;
+        return 0;
+    }
+
+    int count = 1;
+    int ratingSum = DEFAULT_MOVIE_RATING;
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    while (MyFile >> line) {
+        char* currentId = getColumn(line, RATINGS_MOVIE_ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+        delete[] currentId;
+
+        if (movieId == idNumber) {
+            char* currentRating = getColumn(line, RATINGS_RATING_COLUMN);
+            int ratingNumber = myAtoi(currentId);
+            delete[] currentRating;
+
+            count++;
+            ratingSum += ratingNumber;
+        }
+    }
+
+    return ratingSum / count;
+}
+
 movieType* getMovies(routeParamsType routeParams) {
     ifstream MoviesDB(MOVIES_DB);
 
@@ -157,7 +192,6 @@ movieType* getMovies(routeParamsType routeParams) {
         }
 
         char* currentDirector = getColumn(line, MOVIES_DIRECTOR_COLUMN);
-        char* currentRating = getColumn(line, MOVIES_RATING_COLUMN);
 
         char* currentActorsCount = getColumn(line, MOVIES_ACTORS_COUNT_COLUMN);
         int actorsCountNumber = myAtoi(currentActorsCount);
@@ -165,12 +199,15 @@ movieType* getMovies(routeParamsType routeParams) {
 
         char** currentActors = getMovieActors(idNumber, actorsCountNumber);
 
+        double currentRating = getMovieRating(idNumber);
+
         movieType currentMovie;
         currentMovie.id = idNumber;
         currentMovie.title = currentTitle;
         currentMovie.year = yearNumber;
         currentMovie.genre = currentGenre;
         currentMovie.director = currentDirector;
+        currentMovie.rating = currentRating;
         currentMovie.actorsCount = actorsCountNumber;
         currentMovie.actors = currentActors;
 
@@ -198,7 +235,6 @@ int addMovie(const char* title, int year, const char* genre, const char* directo
     MyFile << year << DEFAULT_DB_DELIMITER;
     MyFile << genre << DEFAULT_DB_DELIMITER;
     MyFile << director << DEFAULT_DB_DELIMITER;
-    MyFile << 5 << DEFAULT_DB_DELIMITER;
     MyFile << actorsCount << '\n';
 
     MyFile.close();

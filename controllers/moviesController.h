@@ -10,6 +10,8 @@ void addActorsToMovie(const char* const* actors, int actorsCount, int movieId);
 
 char** getMovieActors(int movieId, int actorsCount);
 
+double getMovieRating(int movieId);
+
 movieType* getMovies(routeParamsType routeParams);
 
 int addMovie(const char* title, int year, const char* genre, const char* director, const char* const* actors, int actorsCount);

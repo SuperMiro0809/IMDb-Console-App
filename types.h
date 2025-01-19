@@ -25,7 +25,7 @@ struct movieType {
     int year;
     char* genre;
     char* director;
-    char* rating;
+    double rating;
     char** actors;
     int actorsCount;
 };

@@ -11,3 +11,5 @@ constexpr int DEFAULT_TEXT_FIELD_LENGTH = 255;
 
 constexpr char DEFAULT_DB_DELIMITER = '|';
 constexpr int DEFAULT_DB_ROW_SIZE = 1000;
+
+constexpr int DEFAULT_MOVIE_RATING = 5;
