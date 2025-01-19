@@ -35,7 +35,7 @@ bool checkIfUserExists(const char* username) {
 
     char line[DEFAULT_DB_ROW_SIZE];
 
-    while (MyFile >> line) {
+    while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
         char* currentUsername = getColumn(line, USERS_USERNAME_COLUMN);
 
         int cmp = myStrCmp(username, currentUsername);
@@ -96,7 +96,7 @@ int loginUser(const char* username, const char* password) {
 
     char line[DEFAULT_DB_ROW_SIZE];
 
-    while (MyFile >> line) {
+    while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
         char* currentId = getColumn(line, USERS_ID_COLUMN);
         char* currentUsername = getColumn(line, USERS_USERNAME_COLUMN);
         char* currentPassword = getColumn(line, USERS_PASSWORD_COLUMN);
@@ -123,7 +123,7 @@ userType getUserById(int id) {
     ifstream MyFile(USERS_DB);
 
     char line[DEFAULT_DB_ROW_SIZE];
-    while (MyFile >> line) {
+    while (MyFile.getline(line, DEFAULT_DB_ROW_SIZE)) {
         char* currentId = getColumn(line, USERS_ID_COLUMN);
         int idNumber = myAtoi(currentId);
 
