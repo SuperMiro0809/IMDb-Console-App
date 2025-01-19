@@ -20,4 +20,6 @@ void printUserInfo(const char* username, const char* role);
 
 void printMoviesTable(const movieType* movies, int length);
 
+void printMovieInfo(movieType movie);
+
 void printRouteParams(routeParamsType routeParams);

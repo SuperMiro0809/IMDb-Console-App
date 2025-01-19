@@ -37,8 +37,6 @@ void updateColumnForm(movieType& movie, int column, int& result) {
             movie.title = newTitle;
 
             result = updateMovie(movie);
-
-            freeUpMovieSpace(movie);
             break;
         }
         case MOVIES_YEAR_COLUMN: {
@@ -46,8 +44,6 @@ void updateColumnForm(movieType& movie, int column, int& result) {
             movie.year = newYear;
 
             result = updateMovie(movie);
-
-            freeUpMovieSpace(movie);
             break;
         }
         case MOVIES_GENRE_COLUMN: {
@@ -58,8 +54,6 @@ void updateColumnForm(movieType& movie, int column, int& result) {
             movie.genre = newGenre;
 
             result = updateMovie(movie);
-
-            freeUpMovieSpace(movie);
             break;
         }
         case MOVIES_DIRECTOR_COLUMN: {
@@ -70,8 +64,6 @@ void updateColumnForm(movieType& movie, int column, int& result) {
             movie.director = newDirector;
 
             result = updateMovie(movie);
-
-            freeUpMovieSpace(movie);
             break;
         }
         case MOVIES_ACTORS_COUNT_COLUMN: {
@@ -90,13 +82,14 @@ void updateColumnForm(movieType& movie, int column, int& result) {
             movie.actors = newActors;
 
             result = updateMovie(movie);
-
-            freeUpMovieSpace(movie);
             break;
         }
         default:
             result = INVALID_DATA_COLUMN;
     }
+
+    // clean up
+    freeUpMovieSpace(movie);
 }
 
 void updateMovieAction() {
@@ -122,6 +115,7 @@ void updateMovieAction() {
         movieType currentMovie = getMovieById(movieId);
 
         // print movie information
+        printMovieInfo(currentMovie);
 
         int column = printNumberField("Enter which information you want to update < 1 - Title | 2 - Year | 3 - Genre | 4 - Director | 5 - Actors>:");
 

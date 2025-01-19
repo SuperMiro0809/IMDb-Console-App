@@ -145,6 +145,29 @@ void printMoviesTable(const movieType* movies, int length) {
     cout << endl;
 }
 
+void printMovieInfo(movieType movie) {
+    cout << endl;
+
+    setConsoleColor(SECONDARY_YELLOW_COLOR);
+    cout << "Movie details" << endl;
+    resetConsoleColor();
+    cout << "Title: " << movie.title << endl
+         << "Year: " << movie.year << endl
+         << "Genre: " << movie.genre << endl
+         << "Director: " << movie.director << endl
+         << "Actors: ";
+    
+    for (int i = 0; i < movie.actorsCount; i++) {
+        cout << movie.actors[i];
+
+        if (i != movie.actorsCount - 1) {
+            cout << ", ";
+        }
+    }
+
+    cout << endl << endl;
+}
+
 void printRouteParams(routeParamsType routeParams) {
     if (routeParams.searchTitle) {
         setConsoleColor(SECONDARY_YELLOW_COLOR);
