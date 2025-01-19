@@ -1,6 +1,6 @@
 #pragma once
 
-#include <types.h>
+#include <global/types.h>
 
 double getMovieRating(int movieId);
 

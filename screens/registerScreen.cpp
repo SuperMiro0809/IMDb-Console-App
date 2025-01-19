@@ -1,11 +1,11 @@
 #include <screens/registerScreen.h>
 
 #include <controllers/authController.h>
-#include <ui-components.h>
-#include <constants.h>
-#include <errorCodes.h>
-#include <routes.h>
-#include <colors.h>
+#include <global/uiComponents.h>
+#include <global/constants.h>
+#include <global/errorCodes.h>
+#include <global/routes.h>
+#include <global/colors.h>
 
 #include <iostream>
 using namespace std;

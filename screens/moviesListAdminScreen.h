@@ -1,6 +1,6 @@
 #pragma once
 
-#include <types.h>
+#include <global/types.h>
 
 constexpr int ADMIN_SEARCH_TITLE_OPERATION = 1;
 constexpr int ADMIN_SEARCH_GENRE_OPERATION = 2;

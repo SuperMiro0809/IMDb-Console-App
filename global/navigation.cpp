@@ -1,6 +1,6 @@
-#include <navigation.h>
+#include <global/navigation.h>
 
-#include <routes.h>
+#include <global/routes.h>
 #include <screens/landingScreen.h>
 #include <screens/registerScreen.h>
 #include <screens/loginScreen.h>

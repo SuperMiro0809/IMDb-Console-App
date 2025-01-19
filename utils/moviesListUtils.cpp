@@ -1,9 +1,9 @@
 #include <utils/moviesListUtils.h>
 
-#include <ui-components.h>
-#include <constants.h>
-#include <errorCodes.h>
-#include <databaseArchitecture.h>
+#include <global/uiComponents.h>
+#include <global/constants.h>
+#include <global/errorCodes.h>
+#include <global/databaseArchitecture.h>
 #include <controllers/moviesController.h>
 
 #include <iostream>

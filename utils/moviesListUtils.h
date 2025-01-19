@@ -1,6 +1,6 @@
 #pragma once
 
-#include <types.h>
+#include <global/types.h>
 
 void rateMovieAction(int userId);
 

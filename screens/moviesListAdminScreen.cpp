@@ -1,9 +1,9 @@
 #include <screens/moviesListAdminScreen.h>
 
-#include <ui-components.h>
+#include <global/uiComponents.h>
 #include <utils/consoleUtils.h>
-#include <colors.h>
-#include <routes.h>
+#include <global/colors.h>
+#include <global/routes.h>
 #include <controllers/moviesController.h>
 #include <controllers/authController.h>
 #include <utils/routeParamsUtils.h>

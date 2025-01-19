@@ -1,4 +1,4 @@
-#include <ui-components.h>
+#include <global/uiComponents.h>
 
 #include <iomanip>
 #include <utils/consoleUtils.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <types.h>
+#include <global/types.h>
 
 constexpr int INITIAL_SORT_VALUE_SIZE = 5;
 constexpr const char* NO_SORT = "no";

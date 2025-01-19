@@ -1,6 +1,6 @@
-#include <navigation.h>
-#include <routes.h>
-#include <types.h>
+#include <global/navigation.h>
+#include <global/routes.h>
+#include <global/types.h>
 
 void runApplication(userType& user);
 

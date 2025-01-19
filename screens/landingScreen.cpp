@@ -1,9 +1,9 @@
 #include <screens/landingScreen.h>
 
-#include <ui-components.h>
+#include <global/uiComponents.h>
 #include <utils/consoleUtils.h>
-#include <routes.h>
-#include <colors.h>
+#include <global/routes.h>
+#include <global/colors.h>
 
 #include <iostream>
 using namespace std;

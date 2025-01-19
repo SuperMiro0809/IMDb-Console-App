@@ -1,7 +1,7 @@
-#include <errorCodes.h>
+#include <global/errorCodes.h>
 
-#include <ui-components.h>
-#include <colors.h>
+#include <global/uiComponents.h>
+#include <global/colors.h>
 
 void printError(int errorCode) {
 

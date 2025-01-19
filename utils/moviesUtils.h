@@ -1,6 +1,6 @@
 #pragma once
 
-#include <types.h>
+#include <global/types.h>
 
 void sortMoviesByTitle(movieType* movies, int moviesCount, const char* direction);
 

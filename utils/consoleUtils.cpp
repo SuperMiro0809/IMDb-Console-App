@@ -1,6 +1,6 @@
 #include <utils/consoleUtils.h>
 
-#include <colors.h>
+#include <global/colors.h>
 
 #include <iostream>
 using namespace std;

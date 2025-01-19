@@ -1,6 +1,6 @@
 #include <utils/stringUtils.h>
 
-#include <constants.h>
+#include <global/constants.h>
 #include <iostream>
 using namespace std;
 

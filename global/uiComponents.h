@@ -1,8 +1,8 @@
 #pragma once
 
-#include <constants.h>
-#include <colors.h>
-#include <types.h>
+#include <global/constants.h>
+#include <global/colors.h>
+#include <global/types.h>
 
 void printScreenHeader(const char* title, int titleColor, const char* subtitle, int subtitleColor);
 

@@ -1,6 +1,6 @@
 #include <utils/databaseUtils.h>
 
-#include <constants.h>
+#include <global/constants.h>
 #include <utils/stringUtils.h>
 
 #include <fstream>

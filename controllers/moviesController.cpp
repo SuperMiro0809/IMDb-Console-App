@@ -1,11 +1,11 @@
 #include <controllers/moviesController.h>
 
-#include <constants.h>
-#include <databaseArchitecture.h>
+#include <global/constants.h>
+#include <global/databaseArchitecture.h>
 #include <utils/databaseUtils.h>
 #include <utils/stringUtils.h>
 #include <utils/moviesUtils.h>
-#include <errorCodes.h>
+#include <global/errorCodes.h>
 
 #include <fstream>
 #include <iostream>

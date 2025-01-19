@@ -1,9 +1,9 @@
 #include <screens/moviesListAddScreen.h>
 
-#include <ui-components.h>
-#include <colors.h>
+#include <global/uiComponents.h>
+#include <global/colors.h>
 #include <controllers/moviesController.h>
-#include <routes.h>
+#include <global/routes.h>
 
 #include <iostream>
 using namespace std;
