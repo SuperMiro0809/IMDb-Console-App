@@ -4,6 +4,8 @@
 
 int getMoviesCount(routeParamsType routeParams);
 
+int getMovieByIdOrTitle(const char* query);
+
 void addActorsToMovie(const char* const* actors, int actorsCount, int movieId);
 
 char** getMovieActors(int movieId, int actorsCount);
@@ -15,5 +17,7 @@ int addMovie(const char* title, int year, const char* genre, const char* directo
 int updateMovie(int id);
 
 int deleteMovie(int id);
+
+int addMovieRating(const char* query, int userId, int rating);
 
 void freeUpMoviesSpace(movieType* movies, int length);

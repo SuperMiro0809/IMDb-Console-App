@@ -5,6 +5,7 @@
 #include <utils/databaseUtils.h>
 #include <utils/stringUtils.h>
 #include <utils/moviesUtils.h>
+#include <errorCodes.h>
 
 #include <fstream>
 #include <iostream>
@@ -41,6 +42,37 @@ int getMoviesCount(routeParamsType routeParams) {
     }
 
     return count;
+}
+
+int getMovieByIdOrTitle(const char* query) {
+    ifstream MoviesDB(MOVIES_DB);
+
+    char line[DEFAULT_DB_ROW_SIZE];
+    int foundId = 0;
+
+    while (MoviesDB.getline(line, DEFAULT_DB_ROW_SIZE)) {
+        char* currentId = getColumn(line, MOVIES_ID_COLUMN);
+        int idNumber = myAtoi(currentId);
+
+        if (myStrCmp(currentId, query) == 0) {
+            delete[] currentId;
+            foundId = idNumber;
+            break;
+        }
+
+        char* currentTitle = getColumn(line, MOVIES_TITLE_COLUMN);
+
+        if (myStrCmp(currentTitle, query) == 0) {
+            delete[] currentId;
+            delete[] currentTitle;
+            foundId = idNumber;
+            break;
+        }
+    }
+
+    MoviesDB.close();
+
+    return foundId;
 }
 
 void addActorsToMovie(const char* const* actors, int actorsCount, int movieId) {
@@ -182,6 +214,29 @@ int updateMovie(int id) {
 
 int deleteMovie(int id) {
 
+}
+
+int addMovieRating(const char* query, int userId, int rating) {
+    // no nullptr check because because movie search is by title OR by id
+    if (rating < 1 || rating > 10) {
+        return INVALID_RATING;
+    }
+
+    int foundId = getMovieByIdOrTitle(query);
+
+    if (foundId == 0) {
+        return MOVIE_NOT_FOUND;
+    }
+
+    ofstream RatingsDB(RATINGS_DB, ios::app); // open file in append mode
+
+    RatingsDB << foundId << DEFAULT_DB_DELIMITER;
+    RatingsDB << userId << DEFAULT_DB_DELIMITER;
+    RatingsDB << rating << '\n';
+
+    RatingsDB.close();
+
+    return 0;
 }
 
 void freeUpMoviesSpace(movieType* movies, int length) {

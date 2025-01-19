@@ -15,5 +15,11 @@ void printError(int errorCode) {
         case PASSWORDS_NOT_MATCH:
             printScreenText("The two passwords don't match. Please, try again.", ERROR_COLOR);
             break;
+        case MOVIE_NOT_FOUND:
+            printScreenText("Movie with such id or title wasn't found. Please, try again.", ERROR_COLOR);
+            break;
+        case INVALID_RATING:
+            printScreenText("You entered invalid rating value. Please, try again.", ERROR_COLOR);
+            break;
     }
 }

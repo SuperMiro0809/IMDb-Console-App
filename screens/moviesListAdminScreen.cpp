@@ -6,6 +6,7 @@
 #include <routes.h>
 #include <controllers/moviesController.h>
 #include <utils/routeParamsUtils.h>
+#include <utils/moviesListUtils.h>
 
 #include <iostream>
 using namespace std;
@@ -23,6 +24,9 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
             return MOVIES_LIST_PAGE;
         case ADMIN_SEARCH_GENRE_OPERATION:
             searchGenreQuery(routeParams);
+            return MOVIES_LIST_PAGE;
+        case ADMIN_RATE_OPERATION:
+            rateMovieAction(user.id);
             return MOVIES_LIST_PAGE;
         case ADMIN_SORT_TITLE_OPERATION:
             sortTitleQuery(routeParams);
