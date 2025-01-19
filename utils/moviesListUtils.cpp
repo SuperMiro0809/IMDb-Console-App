@@ -74,8 +74,6 @@ void updateColumnForm(movieType& movie, int column, int& result) {
 
             int newActorsCount = printNumberField("How many actors:");
 
-            cin.ignore(); // discard newline character
-
             char** newActors = printActorsField(newActorsCount);
 
             movie.actorsCount = newActorsCount;
