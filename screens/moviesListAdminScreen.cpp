@@ -5,6 +5,7 @@
 #include <colors.h>
 #include <routes.h>
 #include <controllers/moviesController.h>
+#include <controllers/authController.h>
 #include <utils/routeParamsUtils.h>
 #include <utils/moviesListUtils.h>
 
@@ -40,6 +41,7 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
         case ADMIN_ADD_OPERATION:
             return MOVIES_LIST_ADD_PAGE;
         case ADMIN_LOGOUT_OPERATION:
+            logoutUser(user);
             return LANDING_PAGE;
         default:
             return EXIT;
