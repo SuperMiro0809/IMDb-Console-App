@@ -39,5 +39,8 @@ void printError(int errorCode) {
         case INVALID_DATA_COLUMN:
             printScreenText("You entered invalid column to update. Please, try again.", ERROR_COLOR);
             break;
+        case INVALID_OPERATION:
+            printScreenText("You entered invalid operation. Please, try again.", ERROR_COLOR);
+            break;
     }
 }

@@ -19,6 +19,7 @@
 #include <global/colors.h>
 #include <global/routes.h>
 #include <global/appOperations.h>
+#include <global/errorCodes.h>
 #include <utils/consoleUtils.h>
 #include <utils/routeParamsUtils.h>
 #include <utils/moviesListUtils.h>
@@ -33,6 +34,10 @@ int actionMoviesListUserScreen(userType& user, routeParamsType& routeParams) {
 
     do {
         cin >> operation;
+
+        if (operation < SEARCH_TITLE_OPERATION || operation > USER_LOGOUT_OPERATION) {
+            printError(INVALID_OPERATION);
+        }
     } while (operation < SEARCH_TITLE_OPERATION || operation > USER_LOGOUT_OPERATION);
 
     switch (operation) {

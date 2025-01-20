@@ -21,5 +21,6 @@ constexpr int PASSWORDS_NOT_MATCH = -3;
 constexpr int MOVIE_NOT_FOUND = -4;
 constexpr int INVALID_RATING = -5;
 constexpr int INVALID_DATA_COLUMN = -6;
+constexpr int INVALID_OPERATION = -7;
 
 void printError(int errorCode);

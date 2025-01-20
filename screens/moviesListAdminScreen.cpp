@@ -19,6 +19,7 @@
 #include <global/colors.h>
 #include <global/routes.h>
 #include <global/appOperations.h>
+#include <global/errorCodes.h>
 #include <controllers/moviesController.h>
 #include <controllers/authController.h>
 #include <utils/routeParamsUtils.h>
@@ -33,7 +34,11 @@ int actionMoviesListAdminScreen(userType& user, routeParamsType& routeParams) {
 
     do {
         cin >> operation;
-    } while (operation < SEARCH_TITLE_OPERATION || operation > ADMIN_LOGOUT_OPERATION);
+
+        if (operation < SEARCH_TITLE_OPERATION || operation > ADMIN_LOGOUT_OPERATION || operation == RATE_OPERATION) {
+            printError(INVALID_OPERATION);
+        }
+    } while (operation < SEARCH_TITLE_OPERATION || operation > ADMIN_LOGOUT_OPERATION || operation == RATE_OPERATION);
 
     switch (operation) {
         case SEARCH_TITLE_OPERATION:

@@ -16,10 +16,11 @@
 #include <screens/landingScreen.h>
 
 #include <global/uiComponents.h>
-#include <utils/consoleUtils.h>
 #include <global/routes.h>
 #include <global/colors.h>
 #include <global/appOperations.h>
+#include <global/errorCodes.h>
+#include <utils/consoleUtils.h>
 
 #include <iostream>
 using namespace std;
@@ -29,7 +30,11 @@ int actionLandingScreen() {
 
     do {
         cin >> operation;
-    } while (operation < 0 || operation > 3);
+
+        if (operation < LOGIN_OPERATION || operation > EXIT_OPERATION) {
+            printError(INVALID_OPERATION);
+        }
+    } while (operation < LOGIN_OPERATION || operation > EXIT_OPERATION);
 
     switch (operation) {
         case LOGIN_OPERATION:
