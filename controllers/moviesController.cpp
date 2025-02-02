@@ -53,7 +53,7 @@ double getMovieRating(int movieId) {
         }
     }
 
-    return ratingSum / count;
+    return (double) ratingSum / count;
 }
 
 int getMoviesCount(routeParamsType routeParams) {
